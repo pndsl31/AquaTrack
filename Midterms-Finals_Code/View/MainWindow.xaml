@@ -1,0 +1,353 @@
+﻿<Window x:Class="AquaTrack.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AquaTrack.View"
+        mc:Ignorable="d"
+        Title="AquaTrack — Smart Water Monitoring"
+        Height="620" Width="1080"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+
+
+    <Window.Background>
+
+        <ImageBrush ImageSource="..\Images\water_background.jpg" Stretch="UniformToFill"/>
+    </Window.Background>
+
+
+    <Window.Resources>
+
+
+        <Style x:Key="PrimaryButton" TargetType="Button">
+            <Setter Property="Foreground"   Value="White"/>
+            <Setter Property="FontFamily"   Value="Segoe UI Semibold"/>
+            <Setter Property="FontSize"     Value="13"/>
+            <Setter Property="FontWeight"   Value="SemiBold"/>
+            <Setter Property="Cursor"       Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bd"
+                                CornerRadius="10"
+                                Padding="{TemplateBinding Padding}">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                    <GradientStop Color="#0EA5E9" Offset="0"/>
+                                    <GradientStop Color="#0284C7" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <Border.Effect>
+                                <DropShadowEffect Color="#0EA5E9" BlurRadius="18"
+                                                  ShadowDepth="0" Opacity="0.55"/>
+                            </Border.Effect>
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="Background">
+                                    <Setter.Value>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                            <GradientStop Color="#38BDF8" Offset="0"/>
+                                            <GradientStop Color="#0EA5E9" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="bd" Property="Background">
+                                    <Setter.Value>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                            <GradientStop Color="#0369A1" Offset="0"/>
+                                            <GradientStop Color="#075985" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ── Ghost/link button ── -->
+        <Style x:Key="LinkButton" TargetType="Button">
+            <Setter Property="Foreground"        Value="#7DD3FC"/>
+            <Setter Property="FontFamily"        Value="Segoe UI"/>
+            <Setter Property="FontSize"          Value="11"/>
+            <Setter Property="Cursor"            Value="Hand"/>
+            <Setter Property="Background"        Value="Transparent"/>
+            <Setter Property="BorderThickness"   Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <TextBlock x:Name="tb"
+                                   Text="{TemplateBinding Content}"
+                                   FontFamily="{TemplateBinding FontFamily}"
+                                   FontSize="{TemplateBinding FontSize}"
+                                   Foreground="{TemplateBinding Foreground}"
+                                   TextDecorations="Underline"/>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="tb" Property="Foreground" Value="#BAE6FD"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>
+
+    <!-- ═══════════════════  ROOT GRID  ═══════════════════ -->
+    <Grid>
+
+        <!-- Dark translucent overlay over background -->
+        <Rectangle>
+            <Rectangle.Fill>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#CC020617" Offset="0"/>
+                    <GradientStop Color="#BB0C2340" Offset="1"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <Border HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Width="390"
+                CornerRadius="20"
+                Padding="42,38,42,42">
+
+            <Border.Background>
+
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#F0020B2E" Offset="0"/>
+                    <GradientStop Color="#F0041428" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#550EA5E9" Offset="0"/>
+                    <GradientStop Color="#22075985" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Border.BorderThickness>1.2</Border.BorderThickness>
+
+            <Border.Effect>
+                <DropShadowEffect Color="#0EA5E9" BlurRadius="55"
+                                  ShadowDepth="0" Opacity="0.30"/>
+            </Border.Effect>
+
+            <StackPanel>
+
+                <!-- ── Logo ── -->
+                <!--
+                    replaceable
+                    Source="../Images/aquatrack_logo.png"
+                -->
+                <Border Width="60" Height="60"
+                        CornerRadius="30"
+                        HorizontalAlignment="Center"
+                        Margin="0,0,0,10">
+                    <Border.Background>
+                        <RadialGradientBrush>
+                            <GradientStop Color="#0EA5E9" Offset="0"/>
+                            <GradientStop Color="#0369A1" Offset="1"/>
+                        </RadialGradientBrush>
+                    </Border.Background>
+                    <Border.Effect>
+                        <DropShadowEffect Color="#38BDF8" BlurRadius="22"
+                                          ShadowDepth="0" Opacity="0.7"/>
+                    </Border.Effect>
+                    <!-- Swap this Image for your actual logo file -->
+                    <Image Source="../Images/aquatrack_logo.png"
+                           Width="36" Height="36"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+                </Border>
+
+                <!-- ── App name ── -->
+                <TextBlock HorizontalAlignment="Center"
+                           FontFamily="Bahnschrift SemiBold"
+                           FontSize="34"
+                           Margin="0,0,0,2">
+                    <TextBlock.Foreground>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="#FFFFFF" Offset="0"/>
+                            <GradientStop Color="#7DD3FC" Offset="1"/>
+                        </LinearGradientBrush>
+                    </TextBlock.Foreground>
+                    AquaTrack
+                </TextBlock>
+
+                <!-- ── Tagline ── -->
+                <TextBlock Text="Smart Water Usage Monitoring System"
+                           HorizontalAlignment="Center"
+                           FontFamily="Segoe UI"
+                           FontSize="10.5"
+                           Foreground="#607D9F"
+                           Margin="0,0,0,30"/>
+
+                <!-- ── Divider ── -->
+                <Rectangle Height="1" Margin="0,0,0,24" Opacity="0.18">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="Transparent" Offset="0"/>
+                            <GradientStop Color="#38BDF8"     Offset="0.5"/>
+                            <GradientStop Color="Transparent" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+
+                <!-- ── ACCOUNT NUMBER label ── -->
+                <TextBlock Text="ACCOUNT NUMBER"
+                           FontFamily="Segoe UI"
+                           FontSize="9.5"
+                           FontWeight="SemiBold"
+                           Foreground="#4A7FA5"
+                           Margin="2,0,0,6"/>
+
+                <!-- ── Account number field ── -->
+                <Border CornerRadius="10"
+                        BorderThickness="1"
+                        Margin="0,0,0,18">
+                    <Border.BorderBrush>
+                        <SolidColorBrush Color="#1E3A5F"/>
+                    </Border.BorderBrush>
+                    <Border.Background>
+                        <SolidColorBrush Color="#06172B"/>
+                    </Border.Background>
+                    <Grid>
+                        <!-- Water drop icon hint -->
+                        <TextBlock Text="💧"
+                                   FontSize="13"
+                                   VerticalAlignment="Center"
+                                   Margin="12,0,0,0"
+                                   Opacity="0.45"/>
+                        <TextBox x:Name="AccountNumberTextBox"
+                                 Text="{Binding CurrentResident.AccountNumber, UpdateSourceTrigger=PropertyChanged}"
+                                 Background="Transparent"
+                                 Foreground="#E0F2FE"
+                                 CaretBrush="#38BDF8"
+                                 SelectionBrush="#0EA5E9"
+                                 FontFamily="Segoe UI"
+                                 FontSize="13"
+                                 Height="42"
+                                 Padding="36,0,12,0"
+                                 BorderThickness="0"
+                                 VerticalContentAlignment="Center">
+                            <TextBox.Style>
+                                <Style TargetType="TextBox">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsFocused" Value="True">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                    </Grid>
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=AccountNumberTextBox, Path=IsFocused}" Value="True">
+                                    <Setter Property="BorderBrush" Value="#0EA5E9"/>
+                                    <Setter Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect Color="#0EA5E9" BlurRadius="10"
+                                                              ShadowDepth="0" Opacity="0.35"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                </Border>
+
+                <!-- ── PASSWORD label ── -->
+                <TextBlock Text="PASSWORD"
+                           FontFamily="Segoe UI"
+                           FontSize="9.5"
+                           FontWeight="SemiBold"
+                           Foreground="#4A7FA5"
+                           Margin="2,0,0,6"/>
+
+                <!-- ── Password field ── -->
+                <Border CornerRadius="10"
+                        BorderThickness="1"
+                        Margin="0,0,0,10">
+                    <Border.BorderBrush>
+                        <SolidColorBrush Color="#1E3A5F"/>
+                    </Border.BorderBrush>
+                    <Border.Background>
+                        <SolidColorBrush Color="#06172B"/>
+                    </Border.Background>
+                    <Grid>
+                        <TextBlock Text="🔒"
+                                   FontSize="12"
+                                   VerticalAlignment="Center"
+                                   Margin="12,0,0,0"
+                                   Opacity="0.40"/>
+                        <PasswordBox x:Name="PasswordTextBox"
+                                     Background="Transparent"
+                                     Foreground="#E0F2FE"
+                                     CaretBrush="#38BDF8"
+                                     SelectionBrush="#0EA5E9"
+                                     FontFamily="Segoe UI"
+                                     FontSize="13"
+                                     Height="42"
+                                     Padding="36,0,12,0"
+                                     BorderThickness="0"
+                                     VerticalContentAlignment="Center"/>
+                    </Grid>
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=PasswordTextBox, Path=IsFocused}" Value="True">
+                                    <Setter Property="BorderBrush" Value="#0EA5E9"/>
+                                    <Setter Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect Color="#0EA5E9" BlurRadius="10"
+                                                              ShadowDepth="0" Opacity="0.35"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                </Border>
+
+                <!-- ── Forgot password link ── -->
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            Margin="0,0,2,26">
+                    <Button Content="Forgot password?"
+                            Style="{StaticResource LinkButton}"/>
+                </StackPanel>
+
+                <!-- ── Login button ── -->
+                <Button Content="SIGN IN TO AQUATRACK"
+                        Command="{Binding LoginCommand}"
+                        CommandParameter="{Binding ElementName=PasswordTextBox}"
+                        Style="{StaticResource PrimaryButton}"
+                        Height="46"
+                        FontSize="13"
+                        Padding="0"/>
+
+                <TextBlock Text="For account issues, contact your local water district."
+                           HorizontalAlignment="Center"
+                           FontFamily="Segoe UI"
+                           FontSize="9.5"
+                           Foreground="#2D4A66"
+                           TextWrapping="Wrap"
+                           TextAlignment="Center"
+                           Margin="0,20,0,0"/>
+
+            </StackPanel>
+        </Border>
+
+    </Grid>
+</Window>
