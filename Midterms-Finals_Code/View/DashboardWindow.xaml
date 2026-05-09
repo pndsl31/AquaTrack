@@ -98,61 +98,8 @@
                 </Grid>
 
             </Border>
-
-
-            <Border Width="194"
-                Height="76"
-                CornerRadius="18"
-                Background="#050F2D"
-                BorderBrush="#1E5EFF"
-                BorderThickness="1"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top" Margin="102,360,0,0">
-
-                <Border.Effect>
-                    <DropShadowEffect BlurRadius="25"
-                        ShadowDepth="0"
-                        Color="#0A84FF"
-                        Opacity="0.35"/>
-                </Border.Effect>
-
-            </Border>
-            <Border Width="194"
-                Height="76"
-                CornerRadius="18"
-                Background="#050F2D"
-                BorderBrush="#1E5EFF"
-                BorderThickness="1"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top" Margin="313,360,0,0">
-
-                <Border.Effect>
-                    <DropShadowEffect BlurRadius="25"
-                        ShadowDepth="0"
-                        Color="#0A84FF"
-                        Opacity="0.35"/>
-                </Border.Effect>
-
-            </Border>
-            <Border Width="194"
-                Height="76"
-                CornerRadius="18"
-                Background="#050F2D"
-                BorderBrush="#1E5EFF"
-                BorderThickness="1"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top" Margin="523,360,0,0">
-
-                <Border.Effect>
-                    <DropShadowEffect BlurRadius="25"
-                        ShadowDepth="0"
-                        Color="#0A84FF"
-                        Opacity="0.35"/>
-                </Border.Effect>
-
-            </Border>
             <Border Width="192"
-                Height="186"
+                Height="236"
                 CornerRadius="18"
                 Background="#050F2D"
                 BorderBrush="#1E5EFF"
@@ -193,7 +140,7 @@
 
             </Border>
             <Border Width="194"
-                Height="186"
+                Height="236"
                 CornerRadius="18"
                 Background="#050F2D"
                 BorderBrush="#1E5EFF"
@@ -234,7 +181,7 @@
                 </Grid>
             </Border>
             <Border Width="194"
-                Height="186"
+                Height="236"
                 CornerRadius="18"
                 Background="#050F2D"
                 BorderBrush="#1E5EFF"
@@ -274,6 +221,20 @@
                     </Border>
                 </Grid>
             </Border>
+            <TextBlock Text="{Binding HouseHold.OwnerName}" FontSize="30" Margin="117,48,223,341" Foreground="White" FontFamily="Segoe UI"/>
+
+            <TextBlock Text="🏠︎" FontSize="30" Margin="117,95,642,294" Foreground="White"/>
+            <TextBlock Text="Household ID" FontSize="15" Margin="166,98,535,314" Foreground="White" FontFamily="Segoe UI"/>
+            <TextBlock Text="{Binding HouseHold.HouseholdID}" FontSize="12" Margin="166,120,535,292" Foreground="White" FontFamily="Segoe UI"/>
+
+            <TextBlock Text="👤" FontSize="30" Margin="287,95,472,294" Foreground="White"/>
+            <TextBlock Text="Account Number" FontSize="15" Margin="331,98,353,314" Foreground="White" FontFamily="Segoe UI"/>
+            <TextBlock Text="{Binding CurrentUser.AccountNumber}" FontSize="12" Margin="332,120,369,292" Foreground="White" FontFamily="Segoe UI"/>
+
+            <TextBlock Text="⏲" FontSize="30" Margin="479,95,280,294" Foreground="White"/>
+            <TextBlock Text="Meter Number" FontSize="15" Margin="533,98,151,314" Foreground="White" FontFamily="Segoe UI"/>
+            <TextBlock Text="{Binding Meter.MeterNumber}" FontSize="12" Margin="536,120,165,292" Foreground="White" FontFamily="Segoe UI"/>
+            
             <Expander HorizontalAlignment="Left" Height="426" Header="☰  AquaTrack" IsExpanded="False" 
   Margin="4,0,0,0" VerticalAlignment="Center" Width="200" 
   Foreground="White">
@@ -307,21 +268,13 @@
                     </Grid.RowDefinitions>
                     <Image Grid.Row="0" Source="/Images/LogoOnly.png"/>
                     <Button Grid.Row="1" Content="🏠  Dashboard"  Command="{Binding HomePageCommand}" Style="{StaticResource NavButton}" />
-                    <Button Grid.Row="2" Content="📟  Submit Meter Reading"  Command="{Binding NavBar.SubmitMeterCommand}"    Style="{StaticResource NavButton}"/>
+                    <Button Grid.Row="2" Content="📟  Submit Meter Reading"  Command="{Binding NavBar.GoToSubmitMeterCommand}"    Style="{StaticResource NavButton}"/>
                     <Button Grid.Row="3" Content="💳  Billing"     Command="{Binding ProfileCommand}"    Style="{StaticResource NavButton}"/>
                     <Button Grid.Row="4" Content="🔔  Alerts"      Command="{Binding WorkoutCommand}"    Style="{StaticResource NavButton}"/>
                     <Button Grid.Row="5" Content="🚪  Log Out"  Command="{Binding LogoutCommand}"  Style="{StaticResource NavButtonDanger}"/>
                 </Grid>
             </Expander>
-            <TextBlock Text="{Binding HouseHold.OwnerName}" FontSize="30" Margin="117,48,223,341" Foreground="White" FontFamily="Segoe UI"/>
-            
-            <TextBlock Text="🏠︎" FontSize="30" Margin="117,95,642,294" Foreground="White"/>
-            <TextBlock Text="Household ID" FontSize="15" Margin="166,98,535,314" Foreground="White" FontFamily="Segoe UI"/>
-            <TextBlock Text="{Binding HouseHold.HouseholdID}" FontSize="12" Margin="166,120,535,292" Foreground="White" FontFamily="Segoe UI"/>
 
-            <TextBlock Text="👤" FontSize="30" Margin="287,95,472,294" Foreground="White"/>
-            <TextBlock Text="Account Number" FontSize="15" Margin="331,98,353,314" Foreground="White" FontFamily="Segoe UI"/>
-            <TextBlock Text="{Binding CurrentUser.AccountNumber}" FontSize="12" Margin="332,120,369,292" Foreground="White" FontFamily="Segoe UI"/>
         </Grid>
     </Viewbox>
 </Window>

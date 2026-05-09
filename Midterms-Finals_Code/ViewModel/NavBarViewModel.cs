@@ -15,7 +15,8 @@ namespace AquaTrack.ViewModel
         private Window _currentWindow;
         Account CurrentUser { get; set; }
         HouseholdModel HouseHold { get; set; }
-        public ICommand GoToSubmitCommand { get; set; }
+        public MeterModel Meter { get; set; }
+        public ICommand GoToSubmitMeterCommand { get; set; }
         //public ICommand GoToSubjectsCommand { get; set; }
         //public ICommand GoToProfileCommand { get; set; }
         public ICommand GoToMainDashboardCommand { get; set; }
@@ -23,26 +24,28 @@ namespace AquaTrack.ViewModel
 
 
 
-        public NavBarViewModel(Account currentUser, HouseholdModel household, Window currentWindow)
+        public NavBarViewModel(Account currentUser, HouseholdModel household, Window currentWindow, MeterModel meter)
         {
             CurrentUser = currentUser;
             HouseHold = household;
+            Meter = meter;
             _currentWindow = currentWindow;
             //GoToGradesCommand = new RelayCommand(GoToGrades);
             //GoToSubjectsCommand = new RelayCommand(GoToSubjects);
             //GoToProfileCommand = new RelayCommand(GoToProfile);
             GoToMainDashboardCommand = new RelayCommand(GoToMainDashboard);
+            GoToSubmitMeterCommand = new RelayCommand(GoToSubmitMeter);
             LogoutCommand = new RelayCommand(Logout);
         }
 
-        //public void GoToGrades(object? parameter)
-        //{
-        //    var win = new GradesWindow(CurrentUser);
-        //    //win.DataContext = new GradesWindowVM(CurrentUser);
-        //    win.Show();
+        public void GoToSubmitMeter(object? parameter)
+        {
+            var win = new SubmitReading(CurrentUser, HouseHold);
+            //win.DataContext = new GradesWindowVM(CurrentUser);
+            win.Show();
 
-        //    _currentWindow.Close();
-        //}
+            _currentWindow.Close();
+        }
 
         //public void GoToSubjects(object? parameter)
         //{
@@ -64,7 +67,7 @@ namespace AquaTrack.ViewModel
 
         public void GoToMainDashboard(object? parameter)
         {
-            var win = new DashboardWindow(CurrentUser, HouseHold);
+            var win = new DashboardWindow(CurrentUser, HouseHold, Meter);
             //win.DataContext = new Window1(CurrentUser);
             win.Show();
 

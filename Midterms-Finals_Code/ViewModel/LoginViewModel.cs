@@ -12,12 +12,14 @@ namespace AquaTrack.ViewModel
     {
         public Account CurrentUser { get; set; }
         public HouseholdModel HouseHold { get; set; }
+        public MeterModel Meter { get; set; }
         public ICommand LoginCommand { get; set; }
 
         public LoginViewModel()
         {
             CurrentUser = new Account();
             HouseHold = new HouseholdModel();
+            Meter = new MeterModel();
             LoginCommand = new RelayCommand(ExecuteLogin);
         }
 
@@ -51,10 +53,18 @@ namespace AquaTrack.ViewModel
                 {
                     await connection.OpenAsync();
 
-                    string query = @"SELECT A.Account_Number, A.Password, H.Household_ID, H.Owner_Name, H.Email, H.Address, H.Registration_Date
+                    string query = @"SELECT A.Account_Number, A.Password, H.Household_ID, H.Owner_Name, H.Email, H.Address, H.Registration_Date, M.Meter_ID, M.Meter_Number, M.Location, M.Installation_Date, M.Status, M.Household_ID
                         FROM Accounts A
                         JOIN HouseHold H
                         ON A.Account_Number = H.Account_Number
+                        JOIN Meter M
+                        ON H.Household_ID = M.Household_ID
+                        JOIN Usage U
+                        ON M.Meter_ID = U.Meter_ID
+                        JOIN Bill B
+                        ON U.Usage_ID = B.Usage_ID
+                        JOIN Alert AL
+                        ON B.Household_ID = AL.Houshold_ID
                         WHERE A.Account_Number = @AccountNumber AND A.Password = @password;";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
@@ -72,11 +82,16 @@ namespace AquaTrack.ViewModel
                                 HouseHold.Email = reader["Email"]?.ToString() ?? "";
                                 HouseHold.Address = reader["Address"]?.ToString() ?? "";
                                 HouseHold.RegistrationDate = reader["Registration_Date"]?.ToString() ?? "";
-
+                                Meter.MeterID = reader["Meter_ID"]?.ToString() ?? "";
+                                Meter.MeterNumber = reader["Meter_Number"]?.ToString() ?? "";
+                                Meter.Location = reader["Location"]?.ToString() ?? "";
+                                Meter.InstallationDate = reader["Installation_Date"]?.ToString() ?? "";
+                                Meter.Status = reader["Status"]?.ToString() ?? "";
+                                Meter.HouseholdID = reader["Household_ID"]?.ToString() ?? "";
                                 MessageBox.Show($"Welcome back, {HouseHold.OwnerName}!", "Login Successful",
                                     MessageBoxButton.OK, MessageBoxImage.Information);
 
-                                var dashboard = new DashboardWindow(CurrentUser, HouseHold);
+                                var dashboard = new DashboardWindow(CurrentUser, HouseHold, Meter);
                                 dashboard.Show();
                                 Application.Current.MainWindow.Close();
                             }

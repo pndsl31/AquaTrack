@@ -17,12 +17,14 @@ namespace AquaTrack.View
     {
         public Account CurrentUser { get; set; }
         public HouseholdModel HouseHold { get; set; }
-        public DashboardWindow(Account currentUser, HouseholdModel household)
+        public MeterModel Meter { get; set; }
+        public DashboardWindow(Account currentUser, HouseholdModel household, MeterModel meter)
         {
             CurrentUser = currentUser;
             HouseHold = household;
+            Meter = meter;
             InitializeComponent();
-            DataContext = new ViewModel.DashboardViewModel(currentUser, household, this);
+            DataContext = new ViewModel.DashboardViewModel(currentUser, household, this, meter);
         }
     }
 }

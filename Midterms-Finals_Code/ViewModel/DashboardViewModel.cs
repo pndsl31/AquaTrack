@@ -12,14 +12,16 @@ namespace AquaTrack.ViewModel
     {
         public Account CurrentUser { get; set; }
         public HouseholdModel HouseHold { get; set; }
+        public MeterModel Meter { get; set; }
 
         public NavBarViewModel NavBar { get; set; }
 
-        public DashboardViewModel(Account currentUser, HouseholdModel household, Window currentWindow)
+        public DashboardViewModel(Account currentUser, HouseholdModel household, Window currentWindow, MeterModel meter)
         {
             CurrentUser = currentUser;
             HouseHold = household;
-            NavBar = new NavBarViewModel(currentUser, household, currentWindow);
+            NavBar = new NavBarViewModel(currentUser, household, currentWindow, meter);
+            Meter = meter;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AquaTrack.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,10 +18,16 @@ namespace AquaTrack.View
     /// <summary>
     /// Interaction logic for SubmitReading.xaml
     /// </summary>
+    /// 
+
     public partial class SubmitReading : Window
     {
-        public SubmitReading()
+        public Account CurrentUser { get; set; }
+        public HouseholdModel HouseHold { get; set; }
+        public SubmitReading(Account currentUser, HouseholdModel household)
         {
+            CurrentUser = currentUser;
+            HouseHold = household;
             InitializeComponent();
         }
     }
