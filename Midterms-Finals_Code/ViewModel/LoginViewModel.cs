@@ -13,6 +13,10 @@ namespace AquaTrack.ViewModel
         public Account CurrentUser { get; set; }
         public HouseholdModel HouseHold { get; set; }
         public MeterModel Meter { get; set; }
+        public UsageModel Usage { get; set; }
+        public BillModel Bill { get; set; }
+        public AlertModel Alert { get; set; }
+
         public ICommand LoginCommand { get; set; }
 
         public LoginViewModel()
@@ -20,6 +24,9 @@ namespace AquaTrack.ViewModel
             CurrentUser = new Account();
             HouseHold = new HouseholdModel();
             Meter = new MeterModel();
+            Usage = new UsageModel();
+            Bill = new BillModel();
+            Alert = new AlertModel();
             LoginCommand = new RelayCommand(ExecuteLogin);
         }
 
@@ -53,7 +60,10 @@ namespace AquaTrack.ViewModel
                 {
                     await connection.OpenAsync();
 
-                    string query = @"SELECT A.Account_Number, A.Password, H.Household_ID, H.Owner_Name, H.Email, H.Address, H.Registration_Date, M.Meter_ID, M.Meter_Number, M.Location, M.Installation_Date, M.Status, M.Household_ID
+                    string query = @"SELECT A.Account_Number, A.Password, H.Household_ID, H.Owner_Name, H.Email, H.Address, H.Registration_Date, 
+                        M.Meter_ID, M.Meter_Number, M.Location, M.Installation_Date, M.Status, M.Household_ID, U.Usage_ID U.Read_Date, U.Consumption, 
+                        U.Usage_Status, U.Meter_ID, B.Bill_ID, B.Due_Date, B.Amount_Due, B.Status, B.Household_ID, B.Usage_ID, AL.Alrt_ID, 
+                        AL.Alert_Type, AL.Alert_Date, AL.Message, AL.Status, AL.Household_ID
                         FROM Accounts A
                         JOIN HouseHold H
                         ON A.Account_Number = H.Account_Number
@@ -64,7 +74,7 @@ namespace AquaTrack.ViewModel
                         JOIN Bill B
                         ON U.Usage_ID = B.Usage_ID
                         JOIN Alert AL
-                        ON B.Household_ID = AL.Houshold_ID
+                        ON B.Household_ID = AL.Household_ID
                         WHERE A.Account_Number = @AccountNumber AND A.Password = @password;";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
@@ -88,6 +98,11 @@ namespace AquaTrack.ViewModel
                                 Meter.InstallationDate = reader["Installation_Date"]?.ToString() ?? "";
                                 Meter.Status = reader["Status"]?.ToString() ?? "";
                                 Meter.HouseholdID = reader["Household_ID"]?.ToString() ?? "";
+                                Usage.UsageID = reader["Usage_ID"]?.ToString() ?? "";
+                                Usage.ReadDate = reader["Usage_ReadDate"]?.ToString() ?? "";
+                                Meter.HouseholdID = reader["Household_ID"]?.ToString() ?? "";
+                                Meter.HouseholdID = reader["Household_ID"]?.ToString() ?? "";
+
                                 MessageBox.Show($"Welcome back, {HouseHold.OwnerName}!", "Login Successful",
                                     MessageBoxButton.OK, MessageBoxImage.Information);
 
