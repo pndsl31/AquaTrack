@@ -10,12 +10,14 @@ namespace AquaTrack.ViewModel
 {
     public class LoginViewModel : ObservableObject
     {
-        public ResidentModel CurrentResident { get; set; }
+        public Account CurrentUser { get; set; }
+        public HouseholdModel HouseHold { get; set; }
         public ICommand LoginCommand { get; set; }
 
         public LoginViewModel()
         {
-            CurrentResident = new ResidentModel();
+            CurrentUser = new Account();
+            HouseHold = new HouseholdModel();
             LoginCommand = new RelayCommand(ExecuteLogin);
         }
 
@@ -24,24 +26,24 @@ namespace AquaTrack.ViewModel
             var passwordBox = parameter as PasswordBox;
             if (passwordBox != null)
             {
-                CurrentResident.Password = passwordBox.Password;
+                CurrentUser.Password = passwordBox.Password;
             }
 
-            if (string.IsNullOrWhiteSpace(CurrentResident.AccountNumber))
+            if (string.IsNullOrWhiteSpace(CurrentUser.AccountNumber))
             {
                 MessageBox.Show("Please enter your Account Number.", "Validation",
                     MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(CurrentResident.Password))
+            if (string.IsNullOrWhiteSpace(CurrentUser.Password))
             {
                 MessageBox.Show("Please enter your Password.", "Validation",
                     MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Database=aquatrack;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Application Name=""SQL Server Management Studio"";Command Timeout=0";
+            string connectionString = @"Server=DESKTOP-6085EPQ;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
 
             try
             {
@@ -49,32 +51,32 @@ namespace AquaTrack.ViewModel
                 {
                     await connection.OpenAsync();
 
-                    string query = @"SELECT AccountNumber, Password, FullName, Email,
-                                            Address, ContactNumber, MeterID
-                                     FROM Residents
-                                     WHERE AccountNumber = @accountNumber
-                                       AND Password = @password";
+                    string query = @"SELECT A.Account_Number, A.Password, H.Household_ID, H.Owner_Name, H.Email, H.Address, H.Registration_Date
+                        FROM Accounts A
+                        JOIN HouseHold H
+                        ON A.Account_Number = H.Account_Number
+                        WHERE A.Account_Number = @AccountNumber AND A.Password = @password;";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@accountNumber", CurrentResident.AccountNumber);
-                        command.Parameters.AddWithValue("@password", CurrentResident.Password);
-
+                        command.Parameters.AddWithValue("@accountNumber", CurrentUser.AccountNumber);
+                        command.Parameters.AddWithValue("@password", CurrentUser.Password);
                         using (SqlDataReader reader = await command.ExecuteReaderAsync())
                         {
                             if (await reader.ReadAsync())
                             {
-                                CurrentResident.AccountNumber = reader["AccountNumber"]?.ToString() ?? "";
-                                CurrentResident.FullName      = reader["FullName"]?.ToString() ?? "";
-                                CurrentResident.Email         = reader["Email"]?.ToString() ?? "";
-                                CurrentResident.Address       = reader["Address"]?.ToString() ?? "";
-                                CurrentResident.ContactNumber = reader["ContactNumber"]?.ToString() ?? "";
-                                CurrentResident.MeterID       = reader["MeterID"]?.ToString() ?? "";
+                                CurrentUser.AccountNumber = reader["Account_Number"]?.ToString() ?? "";
+                                CurrentUser.Password = reader["Password"]?.ToString() ?? "";
+                                HouseHold.HouseholdID = reader["Household_ID"]?.ToString() ?? "";
+                                HouseHold.OwnerName = reader["Owner_Name"]?.ToString() ?? "";
+                                HouseHold.Email = reader["Email"]?.ToString() ?? "";
+                                HouseHold.Address = reader["Address"]?.ToString() ?? "";
+                                HouseHold.RegistrationDate = reader["Registration_Date"]?.ToString() ?? "";
 
-                                MessageBox.Show($"Welcome back, {CurrentResident.FullName}!", "Login Successful",
+                                MessageBox.Show($"Welcome back, {HouseHold.OwnerName}!", "Login Successful",
                                     MessageBoxButton.OK, MessageBoxImage.Information);
 
-                                var dashboard = new DashboardWindow(CurrentResident);
+                                var dashboard = new DashboardWindow(CurrentUser, HouseHold);
                                 dashboard.Show();
                                 Application.Current.MainWindow.Close();
                             }

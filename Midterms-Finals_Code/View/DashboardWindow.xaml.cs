@@ -15,9 +15,14 @@ namespace AquaTrack.View
 {
     public partial class DashboardWindow : Window
     {
-        public DashboardWindow(ResidentModel resident)
+        public Account CurrentUser { get; set; }
+        public HouseholdModel HouseHold { get; set; }
+        public DashboardWindow(Account currentUser, HouseholdModel household)
         {
+            CurrentUser = currentUser;
+            HouseHold = household;
             InitializeComponent();
+            DataContext = new ViewModel.DashboardViewModel(currentUser, household, this);
         }
     }
 }

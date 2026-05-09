@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net10.0-windows</TargetFramework>
+    <TargetFramework>net9.0-windows</TargetFramework>
     <RootNamespace>AquaTrack</RootNamespace>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -10,12 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\LogoOnly.png" />
+    <None Remove="Images\WaterHomepageBG.png" />
+    <None Remove="Images\WaterUsageBG.png" />
     <None Remove="Images\water_background.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Model\" />
-    <Folder Include="ViewModel\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,6 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\AquatrackLogo.png" />
+    <Resource Include="Images\LogoOnly.png" />
+    <Resource Include="Images\WaterHomepageBG.png" />
+    <Resource Include="Images\WaterUsageBG.png" />
     <Resource Include="Images\water_background.jpg" />
   </ItemGroup>
 

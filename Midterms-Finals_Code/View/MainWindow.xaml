@@ -146,42 +146,10 @@
                 <!-- ── Logo ── -->
                 <!--
                     replaceable
-                    Source="../Images/aquatrack_logo.png"
+                    Source="../Images/AquatrackLogo.png"
                 -->
-                <Border Width="60" Height="60"
-                        CornerRadius="30"
-                        HorizontalAlignment="Center"
-                        Margin="0,0,0,10">
-                    <Border.Background>
-                        <RadialGradientBrush>
-                            <GradientStop Color="#0EA5E9" Offset="0"/>
-                            <GradientStop Color="#0369A1" Offset="1"/>
-                        </RadialGradientBrush>
-                    </Border.Background>
-                    <Border.Effect>
-                        <DropShadowEffect Color="#38BDF8" BlurRadius="22"
-                                          ShadowDepth="0" Opacity="0.7"/>
-                    </Border.Effect>
-                    <!-- Swap this Image for your actual logo file -->
-                    <Image Source="../Images/aquatrack_logo.png"
-                           Width="36" Height="36"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"/>
-                </Border>
 
-                <!-- ── App name ── -->
-                <TextBlock HorizontalAlignment="Center"
-                           FontFamily="Bahnschrift SemiBold"
-                           FontSize="34"
-                           Margin="0,0,0,2">
-                    <TextBlock.Foreground>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                            <GradientStop Color="#FFFFFF" Offset="0"/>
-                            <GradientStop Color="#7DD3FC" Offset="1"/>
-                        </LinearGradientBrush>
-                    </TextBlock.Foreground>
-                    AquaTrack
-                </TextBlock>
+                <Image Source="/Images/AquatrackLogo.png" />
 
                 <!-- ── Tagline ── -->
                 <TextBlock Text="Smart Water Usage Monitoring System"
@@ -228,7 +196,7 @@
                                    Margin="12,0,0,0"
                                    Opacity="0.45"/>
                         <TextBox x:Name="AccountNumberTextBox"
-                                 Text="{Binding CurrentResident.AccountNumber, UpdateSourceTrigger=PropertyChanged}"
+                                 Text="{Binding CurrentUser.AccountNumber, UpdateSourceTrigger=PropertyChanged}"
                                  Background="Transparent"
                                  Foreground="#E0F2FE"
                                  CaretBrush="#38BDF8"
