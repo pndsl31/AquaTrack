@@ -53,7 +53,7 @@ namespace AquaTrack.ViewModel
                 return;
             }
 
-            string connectionString = @"Server=DESKTOP-6085EPQ;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
+            string connectionString = @"Server=DESKTOP-2SQJPO3\SQLEXPRESS;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
 
             try
             {
@@ -67,7 +67,7 @@ namespace AquaTrack.ViewModel
 
                         using (SqlCommand command = new SqlCommand(query2, connection))
                         {
-                            command.Parameters.AddWithValue("@accountNumber", CurrentUser.AccountNumber);
+                            command.Parameters.AddWithValue("@AccountNumber", CurrentUser.AccountNumber);
                             command.Parameters.AddWithValue("@password", CurrentUser.Password);
                             using (SqlDataReader reader = await command.ExecuteReaderAsync())
                             {
@@ -106,21 +106,16 @@ namespace AquaTrack.ViewModel
                         AL.Alert_Type, AL.Alert_Date, AL.Message, AL.Status, AL.Household_ID
 
                         FROM Accounts A
-                        JOIN HouseHold H
-                        ON A.Account_Number = H.Account_Number
-                        JOIN Meter M
-                        ON H.Household_ID = M.Household_ID
-                        JOIN Usage U
-                        ON M.Meter_ID = U.Meter_ID
-                        JOIN Bill B
-                        ON U.Usage_ID = B.Usage_ID
-                        JOIN Alert AL
-                        ON B.Household_ID = AL.Household_ID
+                        LEFT JOIN HouseHold H ON A.Account_Number = H.Account_Number
+                        LEFT JOIN Meter M ON H.Household_ID = M.Household_ID
+                        LEFT JOIN Usage U ON M.Meter_ID = U.Meter_ID
+                        LEFT JOIN Bill B ON U.Usage_ID = B.Usage_ID
+                        LEFT JOIN Alert AL ON B.Household_ID = AL.Household_ID
                         WHERE A.Account_Number = @AccountNumber AND A.Password = @password;";
 
                         using (SqlCommand command = new SqlCommand(query, connection))
                         {
-                            command.Parameters.AddWithValue("@accountNumber", CurrentUser.AccountNumber);
+                            command.Parameters.AddWithValue("@AccountNumber", CurrentUser.AccountNumber);
                             command.Parameters.AddWithValue("@password", CurrentUser.Password);
                             using (SqlDataReader reader = await command.ExecuteReaderAsync())
                             {

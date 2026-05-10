@@ -135,7 +135,8 @@
                 <DataGrid ItemsSource="{Binding RecentUsage}" Margin="4">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Usage ID"    Binding="{Binding UsageID}"     Width="80"/>
-                        <DataGridTextColumn Header="Household"   Binding="{Binding OwnerName}"   Width="140"/>
+                        <DataGridTextColumn Header="Owner"       Binding="{Binding OwnerName}"   Width="120"/>
+                        <DataGridTextColumn Header="Household"   Binding="{Binding HouseHold}"   Width="120"/>
                         <DataGridTextColumn Header="Read Date"   Binding="{Binding ReadDate}"    Width="110"/>
                         <DataGridTextColumn Header="m³"          Binding="{Binding Consumption}" Width="70"/>
                         <DataGridTemplateColumn Header="Status"  Width="*">

@@ -38,9 +38,8 @@
 
         <local:AdminNavBarControl DataContext="{Binding NavBar}"
         HorizontalAlignment="Left" VerticalAlignment="Top"/>
-
         <Grid HorizontalAlignment="Left" VerticalAlignment="Top"
-                  Margin="211,59,0,0" Width="640">
+                  Margin="211,58,0,0" Width="640" Height="260">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="15*"/>
                 <ColumnDefinition Width="17*"/>
@@ -48,12 +47,138 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="16"/>
+                <RowDefinition Height="120"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            <Border Background="#050F2D"
+BorderBrush="#1E5EFF"
+BorderThickness="1"
+CornerRadius="14"
+Padding="20,16"
+Margin="0,0,0,16" Grid.ColumnSpan="2">
 
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="18"
+                  ShadowDepth="0"
+                  Color="#0A84FF"
+                  Opacity="0.3"/>
+                </Border.Effect>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- ACCOUNT DROPDOWN -->
+                    <StackPanel Grid.Column="0" Margin="0,0,8,0">
+                        <TextBlock Text="SELECT ACCOUNT"
+               FontSize="9"
+               Foreground="#4A7FA5"
+               FontWeight="SemiBold"
+               Margin="0,0,0,4"/>
+
+                        <Border Background="#06172B"
+            BorderBrush="#1E3A5F"
+            BorderThickness="1"
+            CornerRadius="8">
+
+                            <ComboBox ItemsSource="{Binding Accounts}"
+                  SelectedItem="{Binding SelectedAccount}"
+                  DisplayMemberPath="AccountNumber"
+                  Background="Transparent"
+                  Foreground="White"
+                  BorderThickness="0"
+                  FontFamily="Segoe UI"
+                  FontSize="12"
+                  Height="36"
+                  Padding="10,0"/>
+                        </Border>
+                    </StackPanel>
+
+                    <!-- NEW PASSWORD -->
+                    <StackPanel Grid.Column="1" Margin="4,0">
+                        <TextBlock Text="NEW PASSWORD"
+               FontSize="9"
+               Foreground="#4A7FA5"
+               FontWeight="SemiBold"
+               Margin="0,0,0,4"/>
+
+                        <Border Background="#06172B"
+            BorderBrush="#1E3A5F"
+            BorderThickness="1"
+            CornerRadius="8">
+
+                            <PasswordBox PasswordChanged="UpdatePwBox_Changed"
+                     Background="Transparent"
+                     Foreground="White"
+                     BorderThickness="0"
+                     FontFamily="Segoe UI"
+                     FontSize="12"
+                     Height="36"
+                     Padding="10,0"/>
+                        </Border>
+                    </StackPanel>
+
+                    <!-- CONFIRM PASSWORD -->
+                    <StackPanel Grid.Column="2" Margin="4,0,8,0">
+                        <TextBlock Text="CONFIRM PASSWORD"
+               FontSize="9"
+               Foreground="#4A7FA5"
+               FontWeight="SemiBold"
+               Margin="0,0,0,4"/>
+
+                        <Border Background="#06172B"
+            BorderBrush="#1E3A5F"
+            BorderThickness="1"
+            CornerRadius="8">
+
+                            <PasswordBox PasswordChanged="UpdateConfirmBox_Changed"
+                     Background="Transparent"
+                     Foreground="White"
+                     BorderThickness="0"
+                     FontFamily="Segoe UI"
+                     FontSize="12"
+                     Height="36"
+                     Padding="10,0"/>
+                        </Border>
+                    </StackPanel>
+
+                    <!-- BUTTON -->
+                    <Button Grid.Column="3"
+        Content="Update"
+        Command="{Binding UpdatePasswordCommand}"
+        Width="80"
+        Height="36"
+        Cursor="Hand"
+        VerticalAlignment="Bottom"
+        Foreground="White">
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="b"
+                    CornerRadius="8"
+                    Background="#0EA5E9">
+
+                                    <ContentPresenter HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"/>
+                                </Border>
+
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="b" Property="Opacity" Value="0.8"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+            </Border>
             <!-- Add Account Form -->
-            <Border Grid.Row="0" Background="#050F2D" BorderBrush="#1E5EFF"
-                        BorderThickness="1" CornerRadius="14" Padding="20,16" Grid.ColumnSpan="2" Margin="0,0,0,16" Grid.RowSpan="2">
+            <Border Grid.Row="2" Background="#050F2D" BorderBrush="#1E5EFF"
+                        BorderThickness="1" CornerRadius="14" Padding="20,16" Grid.ColumnSpan="2" Margin="0,21,0,5">
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="18" ShadowDepth="0" Color="#0A84FF" Opacity="0.3"/>
                 </Border.Effect>
@@ -90,7 +215,7 @@
                         </Border>
                     </StackPanel>
                     <Button Grid.Column="3" Content="Add" Command="{Binding AddAccountCommand}"
-                                Width="70" Height="36" Cursor="Hand" VerticalAlignment="Bottom" Foreground="White">
+                                Width="70" Height="36" Cursor="Hand" VerticalAlignment="Top" Foreground="White" Margin="0,17,0,0">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border x:Name="b" CornerRadius="8" Background="#0EA5E9">
@@ -108,7 +233,7 @@
             </Border>
 
             <!-- Message + Action buttons -->
-            <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top" Margin="0,-36,0,0" Grid.ColumnSpan="2">
+            <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top" Margin="0,6,0,0" Grid.ColumnSpan="2" Grid.RowSpan="2">
                 <TextBlock Text="{Binding Message}" FontFamily="Segoe UI" FontSize="11" VerticalAlignment="Center">
                     <TextBlock.Style>
                         <Style TargetType="TextBlock">
@@ -155,7 +280,7 @@
             </StackPanel>
 
             <!-- DataGrid -->
-            <Border Grid.Row="2" Background="#050F2D" BorderBrush="#1E5EFF"
+            <Border Grid.Row="3" Background="#050F2D" BorderBrush="#1E5EFF"
                         BorderThickness="1" CornerRadius="14" Grid.ColumnSpan="2">
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="18" ShadowDepth="0" Color="#0A84FF" Opacity="0.3"/>

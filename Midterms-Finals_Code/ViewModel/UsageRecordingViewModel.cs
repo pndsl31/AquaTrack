@@ -11,7 +11,7 @@ namespace AquaTrack.ViewModel
     public class UsageRecordingViewModel : ObservableObject
     {
         private const string ConnStr =
-            @"Server=DESKTOP-6085EPQ\SQLEXPRESS;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
+            @"Server=DESKTOP-2SQJPO3\SQLEXPRESS;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
 
         public Account CurrentUser { get; }
         public AdminNavBarViewModel NavBar { get; }
@@ -42,6 +42,7 @@ namespace AquaTrack.ViewModel
             NavBar = new AdminNavBarViewModel(user, win);
             RecordCommand = new RelayCommand(async _ => await RecordAsync());
             _ = LoadHouseholdsAsync();
+            _ = LoadRecentAsync();
         }
 
         private async Task LoadHouseholdsAsync()
@@ -130,7 +131,7 @@ namespace AquaTrack.ViewModel
                 await conn.OpenAsync();
                 const string q = @"
                     SELECT TOP 10 u.Usage_ID, u.Read_Date, u.Consumption, u.Usage_Status,
-                           h.Owner_Name
+                           h.Owner_Name, m.Meter_ID,h.Household_ID
                     FROM Usage u
                     INNER JOIN Meter m ON u.Meter_ID = m.Meter_ID
                     INNER JOIN HouseHold h ON m.Household_ID = h.Household_ID
@@ -145,7 +146,9 @@ namespace AquaTrack.ViewModel
                         ReadDate = Convert.ToDateTime(r["Read_Date"]).ToString("MMM dd, yyyy"),
                         Consumption = Convert.ToDecimal(r["Consumption"]),
                         UsageStatus = r["Usage_Status"].ToString()!,
-                        MeterID = r["Meter_ID"].ToString()!
+                        MeterID = r["Meter_ID"].ToString()!,
+                        HouseHold = r["Household_ID"].ToString()!,
+                        OwnerName = r["Owner_Name"].ToString()!
                     });
             }
             catch (Exception ex) { MessageBox.Show("Recent load error: " + ex.Message); }

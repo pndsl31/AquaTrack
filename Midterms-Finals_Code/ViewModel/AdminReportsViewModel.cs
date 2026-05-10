@@ -11,7 +11,7 @@ namespace AquaTrack.ViewModel
     public class AdminReportsViewModel : ObservableObject
     {
         private const string ConnStr =
-            @"Server=DESKTOP-6085EPQ\SQLEXPRESS;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
+            @"Server=DESKTOP-2SQJPO3\SQLEXPRESS;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
 
         public Account CurrentUser { get; }
         public AdminNavBarViewModel NavBar { get; }
@@ -87,7 +87,7 @@ namespace AquaTrack.ViewModel
                         MeterID = r["Meter_ID"].ToString()!
                     });
                 }
-                TotalConsumption = $"{totalConsumption} m³";
+				TotalConsumption = $"{totalConsumption} m³";
 
                 await r.NextResultAsync();
                 AlertHistory.Clear();
@@ -105,7 +105,8 @@ namespace AquaTrack.ViewModel
                         Status = status
                     });
                 }
-                AlertCount = pending.ToString();
+				await r.CloseAsync();
+				AlertCount = pending.ToString();
 
                 // Total unpaid
                 using var cmd2 = new SqlCommand("SELECT dbo.fn_GetTotalUnpaidAmount(@HH)", conn);

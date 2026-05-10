@@ -21,5 +21,17 @@ namespace AquaTrack.View
             => _vm.NewPassword = ((PasswordBox)s).Password;
         private void ConfirmBox_Changed(object s, RoutedEventArgs e)
             => _vm.NewConfirm = ((PasswordBox)s).Password;
+
+        private void UpdatePwBox_Changed(object sender, RoutedEventArgs e)
+        {
+            ((AccountManagementViewModel)DataContext).UpdatePassword =
+                ((PasswordBox)sender).Password;
+        }
+
+        private void UpdateConfirmBox_Changed(object sender, RoutedEventArgs e)
+        {
+            ((AccountManagementViewModel)DataContext).UpdateConfirm =
+                ((PasswordBox)sender).Password;
+        }
     }
 }
