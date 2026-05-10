@@ -1,5 +1,4 @@
-﻿using AquaTrack.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,10 +16,6 @@ namespace AquaTrack.View
 {
     public partial class AdminNavBarControl : UserControl
     {
-        public AdminNavBarControl()
-        {
-            InitializeComponent();
-            DataContext = new AdminNavBarViewModel();
-        }
+        public AdminNavBarControl() => InitializeComponent();
     }
 }

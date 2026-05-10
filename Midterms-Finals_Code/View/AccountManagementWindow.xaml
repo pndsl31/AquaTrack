@@ -36,8 +36,7 @@
     </Window.Background>
     <Grid>
 
-        <local:AdminNavBarControl DataContext="{Binding NavBar}"
-        HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <local:AdminNavBarControl DataContext="{Binding NavBar}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Grid HorizontalAlignment="Left" VerticalAlignment="Top"
                   Margin="211,58,0,0" Width="640" Height="260">
             <Grid.ColumnDefinitions>
@@ -89,7 +88,7 @@ Margin="0,0,0,16" Grid.ColumnSpan="2">
                   SelectedItem="{Binding SelectedAccount}"
                   DisplayMemberPath="AccountNumber"
                   Background="Transparent"
-                  Foreground="White"
+                  Foreground="#FF050F2D"
                   BorderThickness="0"
                   FontFamily="Segoe UI"
                   FontSize="12"
@@ -281,7 +280,7 @@ Margin="0,0,0,16" Grid.ColumnSpan="2">
 
             <!-- DataGrid -->
             <Border Grid.Row="3" Background="#050F2D" BorderBrush="#1E5EFF"
-                        BorderThickness="1" CornerRadius="14" Grid.ColumnSpan="2">
+                        BorderThickness="1" CornerRadius="14" Grid.ColumnSpan="2" Margin="0,0,0,-211">
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="18" ShadowDepth="0" Color="#0A84FF" Opacity="0.3"/>
                 </Border.Effect>

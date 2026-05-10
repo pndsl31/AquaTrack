@@ -42,8 +42,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="../Images/WaterHomepageBG.png"/>
         </Grid.Background>
-        <local:AdminNavBarControl DataContext="{Binding NavBar}"
-                                      HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <local:AdminNavBarControl DataContext="{Binding NavBar}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="254,23,0,0" Width="640">
             <Grid.RowDefinitions>

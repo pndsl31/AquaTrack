@@ -73,7 +73,7 @@
                                 <ComboBox ItemsSource="{Binding Households}"
                                               SelectedItem="{Binding SelectedHousehold}"
                                               DisplayMemberPath="HouseholdID"
-                                              Background="Transparent" Foreground="White" BorderThickness="0"
+                                              Background="Transparent" Foreground="#FF050F2D" BorderThickness="0"
                                               FontFamily="Segoe UI" Height="38"/>
                             </Border>
                         </StackPanel>

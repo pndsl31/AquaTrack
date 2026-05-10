@@ -97,7 +97,7 @@
                                               SelectedValuePath="HouseholdID"
                                               SelectedValue="{Binding HhID}"
                                               DisplayMemberPath="HouseholdID"
-                                              Background="Transparent" Foreground="White" BorderThickness="0"
+                                              Background="Transparent" Foreground="#FF050F2D" BorderThickness="0"
                                               FontFamily="Segoe UI" Height="34"/>
                             </Border>
                         </StackPanel>
