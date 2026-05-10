@@ -11,21 +11,27 @@ namespace AquaTrack.Model
     {
         public string _billID = string.Empty;
         public string _dueDate = string.Empty;
-        public string _amountDue = string.Empty;
+        public decimal _amountDue = 0;
         public string _status = string.Empty;
         public string _houseHoldID = string.Empty;
+        public string _usageID = string.Empty;
 
         public string BillID
         {
             get=> _billID;
             set {  _billID = value; OnPropertyChanged(); }
         }
+        public string UsageID
+        {
+            get => _usageID;
+            set { _usageID = value; OnPropertyChanged(); }
+        }
         public string DueDate
         {
             get => _dueDate;
             set { _dueDate = value; OnPropertyChanged(); }
         }
-        public string AmountDue
+        public decimal AmountDue
         {
             get => _amountDue;
             set { _amountDue = value; OnPropertyChanged(); }

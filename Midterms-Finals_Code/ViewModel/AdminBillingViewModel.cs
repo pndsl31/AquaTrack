@@ -12,7 +12,7 @@ namespace AquaTrack.ViewModel
     public class AdminBillingViewModel : ObservableObject
     {
         private const string ConnStr =
-            @"Server=DESKTOP-6085EPQ;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
+            @"Server=DESKTOP-2SQJPO3\SQLEXPRESS;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
 
         public Account CurrentUser { get; }
         public AdminNavBarViewModel NavBar { get; }
@@ -72,10 +72,7 @@ namespace AquaTrack.ViewModel
                         AmountDue = Convert.ToDecimal(r["Amount_Due"]),
                         Status = r["Status"].ToString()!,
                         UsageID = r["Usage_ID"].ToString()!,
-                        HouseholdID = r["Household_ID"].ToString()!,
-                        OwnerName = r["Owner_Name"].ToString()!,
-                        ReadDate = Convert.ToDateTime(r["Read_Date"]).ToString("MMM dd, yyyy"),
-                        Consumption = Convert.ToDecimal(r["Consumption"])
+                        HouseholdID = r["Household_ID"].ToString()!
                     });
                 ApplyFilter();
             }

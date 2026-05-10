@@ -11,7 +11,7 @@ namespace AquaTrack.ViewModel
     public class UsageRecordingViewModel : ObservableObject
     {
         private const string ConnStr =
-            @"Server=DESKTOP-6085EPQ;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
+            @"Server=DESKTOP-2SQJPO3\SQLEXPRESS;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
 
         public Account CurrentUser { get; }
         public AdminNavBarViewModel NavBar { get; }
@@ -145,7 +145,7 @@ namespace AquaTrack.ViewModel
                         ReadDate = Convert.ToDateTime(r["Read_Date"]).ToString("MMM dd, yyyy"),
                         Consumption = Convert.ToDecimal(r["Consumption"]),
                         UsageStatus = r["Usage_Status"].ToString()!,
-                        OwnerName = r["Owner_Name"].ToString()!
+                        MeterID = r["Meter_ID"].ToString()!
                     });
             }
             catch (Exception ex) { MessageBox.Show("Recent load error: " + ex.Message); }

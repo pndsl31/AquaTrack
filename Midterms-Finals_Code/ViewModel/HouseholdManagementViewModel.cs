@@ -11,7 +11,7 @@ namespace AquaTrack.ViewModel
     public class HouseholdManagementViewModel : ObservableObject
     {
         private const string ConnStr =
-            @"Server=DESKTOP-6085EPQ;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
+            @"Server=DESKTOP-2SQJPO3\SQLEXPRESS;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
 
         public Account CurrentUser { get; }
         public AdminNavBarViewModel NavBar { get; }
@@ -70,7 +70,7 @@ namespace AquaTrack.ViewModel
                             Email = r["Email"].ToString()!,
                             Address = r["Address"].ToString()!,
                             RegistrationDate = r["Registration_Date"].ToString()!,
-                            IsActive = (bool)r["IsActive"]
+                            IsActive = bool.Parse(r["IsActive"].ToString()!),
                         });
                 }
 

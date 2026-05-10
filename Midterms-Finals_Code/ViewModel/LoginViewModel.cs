@@ -1,10 +1,11 @@
-using System;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
 using AquaTrack.Model;
 using AquaTrack.View;
 using Microsoft.Data.SqlClient;
+using System;
+using System.Collections;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace AquaTrack.ViewModel
 {
@@ -52,18 +53,58 @@ namespace AquaTrack.ViewModel
                 return;
             }
 
-            string connectionString = @"Server=DESKTOP-6085EPQ;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
+            string connectionString = @"Server=DESKTOP-2SQJPO3\SQLEXPRESS;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
 
             try
             {
+                bool logged = false;
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     await connection.OpenAsync();
+                    if (CurrentUser.AccountNumber.ToUpper().Contains("ADM"))
+                    {
+                        string query2 = @"SELECT A.Account_Number, A.Password, A.IsActive FROM Accounts A WHERE A.Account_Number = @AccountNumber AND A.Password = @password;";
 
-                    string query = @"SELECT A.Account_Number, A.Password, H.Household_ID, H.Owner_Name, H.Email, H.Address, H.Registration_Date, 
-                        M.Meter_ID, M.Meter_Number, M.Location, M.Installation_Date, M.Status, M.Household_ID, U.Usage_ID U.Read_Date, U.Consumption, 
+                        using (SqlCommand command = new SqlCommand(query2, connection))
+                        {
+                            command.Parameters.AddWithValue("@accountNumber", CurrentUser.AccountNumber);
+                            command.Parameters.AddWithValue("@password", CurrentUser.Password);
+                            using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                            {
+                                if (await reader.ReadAsync())
+                                {
+                                    CurrentUser.AccountNumber = reader["Account_Number"]?.ToString() ?? "";
+                                    CurrentUser.Password = reader["Password"]?.ToString() ?? "";
+                                    CurrentUser.IsActive = bool.Parse(reader["IsActive"]?.ToString() ?? "");
+                                    if (CurrentUser.IsActive)
+                                    {
+                                        MessageBox.Show($"Welcome back, {CurrentUser.AccountNumber.ToUpper()}!", "Login Successful",
+                                        MessageBoxButton.OK, MessageBoxImage.Information);
+                                        
+                                        logged = true;
+                                        var adminDashboard = new AdminDashboardWindow(CurrentUser);
+                                        adminDashboard.Show();
+                                        Application.Current.MainWindow.Close();
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show(
+                                        "Account Disabled.",
+                                        "Login Failed",
+                                        MessageBoxButton.OK,
+                                        MessageBoxImage.Error);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (!logged)
+                    {
+                        string query = @"SELECT A.Account_Number, A.Password, A.IsActive, H.Household_ID, H.Owner_Name, H.Email, H.Address, H.Registration_Date, 
+                        M.Meter_ID, M.Meter_Number, M.Location, M.Installation_Date, M.Status, M.Household_ID, U.Usage_ID, U.Read_Date, U.Consumption, 
                         U.Usage_Status, U.Meter_ID, B.Bill_ID, B.Due_Date, B.Amount_Due, B.Status, B.Household_ID, B.Usage_ID, AL.Alrt_ID, 
                         AL.Alert_Type, AL.Alert_Date, AL.Message, AL.Status, AL.Household_ID
+
                         FROM Accounts A
                         JOIN HouseHold H
                         ON A.Account_Number = H.Account_Number
@@ -77,43 +118,57 @@ namespace AquaTrack.ViewModel
                         ON B.Household_ID = AL.Household_ID
                         WHERE A.Account_Number = @AccountNumber AND A.Password = @password;";
 
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@accountNumber", CurrentUser.AccountNumber);
-                        command.Parameters.AddWithValue("@password", CurrentUser.Password);
-                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        using (SqlCommand command = new SqlCommand(query, connection))
                         {
-                            if (await reader.ReadAsync())
+                            command.Parameters.AddWithValue("@accountNumber", CurrentUser.AccountNumber);
+                            command.Parameters.AddWithValue("@password", CurrentUser.Password);
+                            using (SqlDataReader reader = await command.ExecuteReaderAsync())
                             {
-                                CurrentUser.AccountNumber = reader["Account_Number"]?.ToString() ?? "";
-                                CurrentUser.Password = reader["Password"]?.ToString() ?? "";
-                                HouseHold.HouseholdID = reader["Household_ID"]?.ToString() ?? "";
-                                HouseHold.OwnerName = reader["Owner_Name"]?.ToString() ?? "";
-                                HouseHold.Email = reader["Email"]?.ToString() ?? "";
-                                HouseHold.Address = reader["Address"]?.ToString() ?? "";
-                                HouseHold.RegistrationDate = reader["Registration_Date"]?.ToString() ?? "";
-                                Meter.MeterID = reader["Meter_ID"]?.ToString() ?? "";
-                                Meter.MeterNumber = reader["Meter_Number"]?.ToString() ?? "";
-                                Meter.Location = reader["Location"]?.ToString() ?? "";
-                                Meter.InstallationDate = reader["Installation_Date"]?.ToString() ?? "";
-                                Meter.Status = reader["Status"]?.ToString() ?? "";
-                                Meter.HouseholdID = reader["Household_ID"]?.ToString() ?? "";
-                                Usage.UsageID = reader["Usage_ID"]?.ToString() ?? "";
-                                Usage.ReadDate = reader["Usage_ReadDate"]?.ToString() ?? "";
-                                Meter.HouseholdID = reader["Household_ID"]?.ToString() ?? "";
-                                Meter.HouseholdID = reader["Household_ID"]?.ToString() ?? "";
+                                if (await reader.ReadAsync())
+                                {
+                                    CurrentUser.AccountNumber = reader["Account_Number"]?.ToString() ?? "";
+                                    CurrentUser.Password = reader["Password"]?.ToString() ?? "";
+                                    CurrentUser.IsActive = bool.Parse(reader["IsActive"]?.ToString() ?? "");
+                                    HouseHold.HouseholdID = reader["Household_ID"]?.ToString() ?? "";
+                                    HouseHold.OwnerName = reader["Owner_Name"]?.ToString() ?? "";
+                                    HouseHold.Email = reader["Email"]?.ToString() ?? "";
+                                    HouseHold.Address = reader["Address"]?.ToString() ?? "";
+                                    HouseHold.RegistrationDate = reader["Registration_Date"]?.ToString() ?? "";
+                                    Meter.MeterID = reader["Meter_ID"]?.ToString() ?? "";
+                                    Meter.MeterNumber = reader["Meter_Number"]?.ToString() ?? "";
+                                    Meter.Location = reader["Location"]?.ToString() ?? "";
+                                    Meter.InstallationDate = reader["Installation_Date"]?.ToString() ?? "";
+                                    Meter.Status = reader["Status"]?.ToString() ?? "";
+                                    Meter.HouseholdID = reader["Household_ID"]?.ToString() ?? "";
+                                    Usage.UsageID = reader["Usage_ID"]?.ToString() ?? "";
+                                    Usage.ReadDate = reader["Read_Date"]?.ToString() ?? "";
 
-                                MessageBox.Show($"Welcome back, {HouseHold.OwnerName}!", "Login Successful",
-                                    MessageBoxButton.OK, MessageBoxImage.Information);
+                                    if (CurrentUser.IsActive)
+                                    {
+                                        MessageBox.Show($"Welcome back, {HouseHold.OwnerName}!", "Login Successful",
+                                        MessageBoxButton.OK, MessageBoxImage.Information);
 
-                                var dashboard = new DashboardWindow(CurrentUser, HouseHold, Meter);
-                                dashboard.Show();
-                                Application.Current.MainWindow.Close();
-                            }
-                            else
-                            {
-                                MessageBox.Show("Invalid Account Number or Password.", "Login Failed",
-                                    MessageBoxButton.OK, MessageBoxImage.Error);
+                                        var dashboard = new DashboardWindow(CurrentUser, HouseHold, Meter);
+                                        dashboard.Show();
+                                        Application.Current.MainWindow.Close();
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show(
+                                        "Account Disabled.",
+                                        "Login Failed",
+                                        MessageBoxButton.OK,
+                                        MessageBoxImage.Error);
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show(
+                                        "Invalid Account Number or Password.",
+                                        "Login Failed",
+                                        MessageBoxButton.OK,
+                                        MessageBoxImage.Error);
+                                }
                             }
                         }
                     }

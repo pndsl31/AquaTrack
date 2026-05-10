@@ -12,7 +12,7 @@ namespace AquaTrack.ViewModel
     public class AdminAlertsViewModel : ObservableObject
     {
         private const string ConnStr =
-            @"Server=DESKTOP-6085EPQ;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
+            @"Server=DESKTOP-2SQJPO3\SQLEXPRESS;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
 
         public Account CurrentUser { get; }
         public AdminNavBarViewModel NavBar { get; }
@@ -58,10 +58,10 @@ namespace AquaTrack.ViewModel
                 using var conn = new SqlConnection(ConnStr);
                 await conn.OpenAsync();
                 const string q = @"
-                    SELECT a.Alrt_ID, a.Houshold_ID, a.Alert_Type, a.Alert_Date, a.Message, a.Status,
+                    SELECT a.Alrt_ID, a.Household_ID, a.Alert_Type, a.Alert_Date, a.Message, a.Status,
                            h.Owner_Name
                     FROM Alert a
-                    INNER JOIN HouseHold h ON a.Houshold_ID = h.Household_ID
+                    INNER JOIN HouseHold h ON a.Household_ID = h.Household_ID
                     ORDER BY a.Alert_Date DESC";
                 using var cmd = new SqlCommand(q, conn);
                 using var r = await cmd.ExecuteReaderAsync();
@@ -70,12 +70,12 @@ namespace AquaTrack.ViewModel
                     _all.Add(new AlertModel
                     {
                         AlrtID = r["Alrt_ID"].ToString()!,
-                        HouseholdID = r["Houshold_ID"].ToString()!,
+                        HouseholdID = r["Household_ID"].ToString()!,
                         AlertType = r["Alert_Type"].ToString()!,
                         AlertDate = Convert.ToDateTime(r["Alert_Date"]).ToString("MMM dd, yyyy"),
                         Message = r["Message"].ToString()!,
                         Status = r["Status"].ToString()!,
-                        OwnerName = r["Owner_Name"].ToString()!
+                        //OwnerName = r["Owner_Name"].ToString()!
                     });
                 ApplyFilter();
             }

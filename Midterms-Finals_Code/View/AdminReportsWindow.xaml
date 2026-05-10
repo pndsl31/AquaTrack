@@ -6,161 +6,177 @@
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Window.Resources>
         <Style TargetType="DataGrid">
-            <Setter Property="Background" Value="Transparent"/> <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Foreground" Value="White"/>        <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="FontSize" Value="11"/>             <Setter Property="RowBackground" Value="#060F25"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="RowBackground" Value="#060F25"/>
             <Setter Property="AlternatingRowBackground" Value="#0A1628"/>
-            <Setter Property="GridLinesVisibility" Value="None"/> <Setter Property="AutoGenerateColumns" Value="False"/>
-            <Setter Property="CanUserAddRows" Value="False"/>     <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="GridLinesVisibility" Value="None"/>
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+            <Setter Property="CanUserAddRows" Value="False"/>
+            <Setter Property="IsReadOnly" Value="True"/>
             <Setter Property="ColumnHeaderStyle">
                 <Setter.Value>
                     <Style TargetType="DataGridColumnHeader">
-                        <Setter Property="Background" Value="#0D1F3C"/> <Setter Property="Foreground" Value="#7DD3FC"/>
-                        <Setter Property="FontWeight" Value="SemiBold"/> <Setter Property="Padding" Value="8,6"/>
+                        <Setter Property="Background" Value="#0D1F3C"/>
+                        <Setter Property="Foreground" Value="#7DD3FC"/>
+                        <Setter Property="FontWeight" Value="SemiBold"/>
+                        <Setter Property="Padding" Value="8,6"/>
                         <Setter Property="BorderThickness" Value="0"/>
                     </Style>
                 </Setter.Value>
             </Setter>
         </Style>
     </Window.Resources>
-    <Viewbox>
-        <Grid Width="800">
-            <Grid.Background><ImageBrush ImageSource="../Images/WaterHomepageBG.png"/></Grid.Background>
-            <local:AdminNavBarControl DataContext="{Binding NavBar}"
-                                      HorizontalAlignment="Left" VerticalAlignment="Center" Margin="4,0,0,0"/>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="../Images/WaterHomepageBG.png"/>
+        </Grid.Background>
+        <local:AdminNavBarControl DataContext="{Binding NavBar}"
+                                      HorizontalAlignment="Left" VerticalAlignment="Top" Margin="4,0,0,0"/>
 
-            <Grid HorizontalAlignment="Left" VerticalAlignment="Center" Margin="110,0,0,0" Width="640">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="10"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="10"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="10"/>
-                    <RowDefinition Height="150"/>
-                </Grid.RowDefinitions>
+        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="239,22,0,0" Width="640">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="150"/>
+            </Grid.RowDefinitions>
 
-                <!-- Household selector + stats -->
-                <Border Grid.Row="0" Background="#050F2D" BorderBrush="#1E5EFF"
+            <!-- Household selector + stats -->
+            <Border Grid.Row="0" Background="#050F2D" BorderBrush="#1E5EFF"
                         BorderThickness="1" CornerRadius="14" Padding="18,14">
-                    <Border.Effect><DropShadowEffect BlurRadius="18" ShadowDepth="0" Color="#0A84FF" Opacity="0.3"/></Border.Effect>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="220"/><ColumnDefinition/><ColumnDefinition/><ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="0" Margin="0,0,16,0">
-                            <TextBlock Text="SELECT HOUSEHOLD" FontSize="9" Foreground="#4A7FA5"
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="18" ShadowDepth="0" Color="#0A84FF" Opacity="0.3"/>
+                </Border.Effect>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="220"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Margin="0,0,16,0">
+                        <TextBlock Text="SELECT HOUSEHOLD" FontSize="9" Foreground="#4A7FA5"
                                        FontWeight="SemiBold" Margin="0,0,0,4"/>
-                            <Border Background="#06172B" BorderBrush="#1E3A5F" BorderThickness="1" CornerRadius="8">
-                                <ComboBox ItemsSource="{Binding Households}"
+                        <Border Background="#06172B" BorderBrush="#1E3A5F" BorderThickness="1" CornerRadius="8">
+                            <ComboBox ItemsSource="{Binding Households}"
                                           SelectedItem="{Binding SelectedHousehold}"
                                           DisplayMemberPath="HouseholdID"
                                           Background="Transparent" Foreground="White" BorderThickness="0"
                                           FontFamily="Segoe UI" Height="36"/>
-                            </Border>
-                        </StackPanel>
-                        <!-- Stat cards -->
-                        <Border Grid.Column="1" Background="#0A1628" BorderBrush="#1E5EFF" BorderThickness="1"
+                        </Border>
+                    </StackPanel>
+                    <!-- Stat cards -->
+                    <Border Grid.Column="1" Background="#0A1628" BorderBrush="#1E5EFF" BorderThickness="1"
                                 CornerRadius="10" Margin="4,0" Padding="12,8">
-                            <StackPanel>
-                                <TextBlock Text="Total Consumption" FontSize="9" Foreground="#4A7FA5"/>
-                                <TextBlock Text="{Binding TotalConsumption}" FontFamily="Segoe UI"
+                        <StackPanel>
+                            <TextBlock Text="Total Consumption" FontSize="9" Foreground="#4A7FA5"/>
+                            <TextBlock Text="{Binding TotalConsumption}" FontFamily="Segoe UI"
                                            FontSize="16" FontWeight="Bold" Foreground="#7DD3FC"/>
-                            </StackPanel>
-                        </Border>
-                        <Border Grid.Column="2" Background="#0A1628" BorderBrush="#1E5EFF" BorderThickness="1"
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Column="2" Background="#0A1628" BorderBrush="#1E5EFF" BorderThickness="1"
                                 CornerRadius="10" Margin="4,0" Padding="12,8">
-                            <StackPanel>
-                                <TextBlock Text="Total Unpaid" FontSize="9" Foreground="#4A7FA5"/>
-                                <TextBlock Text="{Binding TotalUnpaid}" FontFamily="Segoe UI"
+                        <StackPanel>
+                            <TextBlock Text="Total Unpaid" FontSize="9" Foreground="#4A7FA5"/>
+                            <TextBlock Text="{Binding TotalUnpaid}" FontFamily="Segoe UI"
                                            FontSize="16" FontWeight="Bold" Foreground="#FB923C"/>
-                            </StackPanel>
-                        </Border>
-                        <Border Grid.Column="3" Background="#0A1628" BorderBrush="#1E5EFF" BorderThickness="1"
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Column="3" Background="#0A1628" BorderBrush="#1E5EFF" BorderThickness="1"
                                 CornerRadius="10" Margin="4,0,0,0" Padding="12,8">
-                            <StackPanel>
-                                <TextBlock Text="Pending Alerts" FontSize="9" Foreground="#4A7FA5"/>
-                                <TextBlock Text="{Binding AlertCount}" FontFamily="Segoe UI"
+                        <StackPanel>
+                            <TextBlock Text="Pending Alerts" FontSize="9" Foreground="#4A7FA5"/>
+                            <TextBlock Text="{Binding AlertCount}" FontFamily="Segoe UI"
                                            FontSize="16" FontWeight="Bold" Foreground="#F87171"/>
-                            </StackPanel>
-                        </Border>
-                    </Grid>
-                </Border>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Border>
 
-                <!-- Usage History label -->
-                <TextBlock Grid.Row="2" Text="Usage &amp; Billing History"
+            <!-- Usage History label -->
+            <TextBlock Grid.Row="2" Text="Usage &amp; Billing History"
                            FontFamily="Segoe UI" FontSize="12" FontWeight="SemiBold"
                            Foreground="#7DD3FC" Margin="4,0,0,0"/>
 
-                <!-- Usage DataGrid -->
-                <Border Grid.Row="4" Background="#050F2D" BorderBrush="#1E5EFF"
+            <!-- Usage DataGrid -->
+            <Border Grid.Row="4" Background="#050F2D" BorderBrush="#1E5EFF"
                         BorderThickness="1" CornerRadius="12">
-                    <Border.Effect><DropShadowEffect BlurRadius="15" ShadowDepth="0" Color="#0A84FF" Opacity="0.25"/></Border.Effect>
-                    <DataGrid ItemsSource="{Binding UsageHistory}" Margin="4">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Usage ID"   Binding="{Binding UsageID}"     Width="80"/>
-                            <DataGridTextColumn Header="Read Date"  Binding="{Binding ReadDate}"    Width="110"/>
-                            <DataGridTextColumn Header="m³"         Binding="{Binding Consumption}" Width="70"/>
-                            <DataGridTemplateColumn Header="Status" Width="*">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding UsageStatus}" FontWeight="SemiBold">
-                                            <TextBlock.Style>
-                                                <Style TargetType="TextBlock">
-                                                    <Setter Property="Foreground" Value="#4ADE80"/>
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding UsageStatus}" Value="Excessive">
-                                                            <Setter Property="Foreground" Value="#F87171"/>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </TextBlock.Style>
-                                        </TextBlock>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Border>
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="15" ShadowDepth="0" Color="#0A84FF" Opacity="0.25"/>
+                </Border.Effect>
+                <DataGrid ItemsSource="{Binding UsageHistory}" Margin="4">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Usage ID"   Binding="{Binding UsageID}"     Width="80"/>
+                        <DataGridTextColumn Header="Read Date"  Binding="{Binding ReadDate}"    Width="110"/>
+                        <DataGridTextColumn Header="m³"         Binding="{Binding Consumption}" Width="70"/>
+                        <DataGridTemplateColumn Header="Status" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding UsageStatus}" FontWeight="SemiBold">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Foreground" Value="#4ADE80"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding UsageStatus}" Value="Excessive">
+                                                        <Setter Property="Foreground" Value="#F87171"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
 
-                <!-- Alert History -->
-                <TextBlock Grid.Row="5" Text="Alert History" Margin="4,4,0,0"
+            <!-- Alert History -->
+            <TextBlock Grid.Row="5" Text="Alert History" Margin="4,4,0,0"
                            FontFamily="Segoe UI" FontSize="12" FontWeight="SemiBold" Foreground="#7DD3FC"/>
 
-                <Border Grid.Row="6" Background="#050F2D" BorderBrush="#1E5EFF"
+            <Border Grid.Row="6" Background="#050F2D" BorderBrush="#1E5EFF"
                         BorderThickness="1" CornerRadius="12">
-                    <Border.Effect><DropShadowEffect BlurRadius="15" ShadowDepth="0" Color="#0A84FF" Opacity="0.25"/></Border.Effect>
-                    <DataGrid ItemsSource="{Binding AlertHistory}" Margin="4">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Alert ID"  Binding="{Binding AlrtID}"    Width="75"/>
-                            <DataGridTextColumn Header="Type"      Binding="{Binding AlertType}" Width="120"/>
-                            <DataGridTextColumn Header="Date"      Binding="{Binding AlertDate}" Width="100"/>
-                            <DataGridTextColumn Header="Message"   Binding="{Binding Message}"   Width="230"/>
-                            <DataGridTemplateColumn Header="Status" Width="*">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Status}" FontWeight="SemiBold">
-                                            <TextBlock.Style>
-                                                <Style TargetType="TextBlock">
-                                                    <Setter Property="Foreground" Value="#4ADE80"/>
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Status}" Value="Pending">
-                                                            <Setter Property="Foreground" Value="#F87171"/>
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Status}" Value="Acknowledged">
-                                                            <Setter Property="Foreground" Value="#FBBF24"/>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </TextBlock.Style>
-                                        </TextBlock>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Border>
-            </Grid>
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="15" ShadowDepth="0" Color="#0A84FF" Opacity="0.25"/>
+                </Border.Effect>
+                <DataGrid ItemsSource="{Binding AlertHistory}" Margin="4">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Alert ID"  Binding="{Binding AlrtID}"    Width="75"/>
+                        <DataGridTextColumn Header="Type"      Binding="{Binding AlertType}" Width="120"/>
+                        <DataGridTextColumn Header="Date"      Binding="{Binding AlertDate}" Width="100"/>
+                        <DataGridTextColumn Header="Message"   Binding="{Binding Message}"   Width="230"/>
+                        <DataGridTemplateColumn Header="Status" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Status}" FontWeight="SemiBold">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Foreground" Value="#4ADE80"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Status}" Value="Pending">
+                                                        <Setter Property="Foreground" Value="#F87171"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Status}" Value="Acknowledged">
+                                                        <Setter Property="Foreground" Value="#FBBF24"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
         </Grid>
-    </Viewbox>
+    </Grid>
 </Window>

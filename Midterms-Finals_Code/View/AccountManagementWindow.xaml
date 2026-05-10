@@ -31,166 +31,173 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Viewbox>
-        <Grid Width="800" Height="448">
-            <Grid.Background>
-                <ImageBrush ImageSource="../Images/WaterHomepageBG.png"/>
-            </Grid.Background>
+    <Window.Background>
+        <ImageBrush ImageSource="../Images/WaterHomepageBG.png" Stretch="UniformToFill"/>
+    </Window.Background>
+    <Grid>
 
-            <!--<local:AdminNavBarControl DataContext="{Binding NavBar}"-->
-            <!--HorizontalAlignment="Left" VerticalAlignment="Center" Margin="4,0,0,0"/>-->
+        <local:AdminNavBarControl DataContext="{Binding NavBar}"
+        HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
-            <Grid HorizontalAlignment="Left" VerticalAlignment="Center"
-                  Margin="110,0,0,0" Width="640">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="15*"/>
-                    <ColumnDefinition Width="17*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="16"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+        <Grid HorizontalAlignment="Left" VerticalAlignment="Top"
+                  Margin="211,59,0,0" Width="640">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="15*"/>
+                <ColumnDefinition Width="17*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="16"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-                <!-- Add Account Form -->
-                <Border Grid.Row="0" Background="#050F2D" BorderBrush="#1E5EFF"
+            <!-- Add Account Form -->
+            <Border Grid.Row="0" Background="#050F2D" BorderBrush="#1E5EFF"
                         BorderThickness="1" CornerRadius="14" Padding="20,16" Grid.ColumnSpan="2" Margin="0,0,0,16" Grid.RowSpan="2">
-                    <Border.Effect>
-                        <DropShadowEffect BlurRadius="18" ShadowDepth="0" Color="#0A84FF" Opacity="0.3"/>
-                    </Border.Effect>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="0" Margin="0,0,8,0">
-                            <TextBlock Text="ACCOUNT NUMBER" FontSize="9" Foreground="#4A7FA5" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                            <Border Background="#06172B" BorderBrush="#1E3A5F" BorderThickness="1" CornerRadius="8">
-                                <TextBox Text="{Binding NewAccountNumber, UpdateSourceTrigger=PropertyChanged}"
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="18" ShadowDepth="0" Color="#0A84FF" Opacity="0.3"/>
+                </Border.Effect>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Margin="0,0,8,0">
+                        <TextBlock Text="ACCOUNT NUMBER" FontSize="9" Foreground="#4A7FA5" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <Border Background="#06172B" BorderBrush="#1E3A5F" BorderThickness="1" CornerRadius="8">
+                            <TextBox Text="{Binding NewAccountNumber, UpdateSourceTrigger=PropertyChanged}"
                                          Background="Transparent" Foreground="White" BorderThickness="0"
                                          FontFamily="Segoe UI" FontSize="12" Height="36" Padding="10,0"
                                          VerticalContentAlignment="Center"/>
-                            </Border>
-                        </StackPanel>
-                        <StackPanel Grid.Column="1" Margin="4,0">
-                            <TextBlock Text="PASSWORD" FontSize="9" Foreground="#4A7FA5" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                            <Border Background="#06172B" BorderBrush="#1E3A5F" BorderThickness="1" CornerRadius="8">
-                                <PasswordBox PasswordChanged="PwBox_Changed"
+                        </Border>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Margin="4,0">
+                        <TextBlock Text="PASSWORD" FontSize="9" Foreground="#4A7FA5" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <Border Background="#06172B" BorderBrush="#1E3A5F" BorderThickness="1" CornerRadius="8">
+                            <PasswordBox PasswordChanged="PwBox_Changed"
                                              Background="Transparent" Foreground="White" BorderThickness="0"
                                              FontFamily="Segoe UI" FontSize="12" Height="36" Padding="10,0"/>
-                            </Border>
-                        </StackPanel>
-                        <StackPanel Grid.Column="2" Margin="4,0,8,0">
-                            <TextBlock Text="CONFIRM PASSWORD" FontSize="9" Foreground="#4A7FA5" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                            <Border Background="#06172B" BorderBrush="#1E3A5F" BorderThickness="1" CornerRadius="8">
-                                <PasswordBox PasswordChanged="ConfirmBox_Changed"
+                        </Border>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" Margin="4,0,8,0">
+                        <TextBlock Text="CONFIRM PASSWORD" FontSize="9" Foreground="#4A7FA5" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <Border Background="#06172B" BorderBrush="#1E3A5F" BorderThickness="1" CornerRadius="8">
+                            <PasswordBox PasswordChanged="ConfirmBox_Changed"
                                              Background="Transparent" Foreground="White" BorderThickness="0"
                                              FontFamily="Segoe UI" FontSize="12" Height="36" Padding="10,0"/>
-                            </Border>
-                        </StackPanel>
-                        <Button Grid.Column="3" Content="Add" Command="{Binding AddAccountCommand}"
+                        </Border>
+                    </StackPanel>
+                    <Button Grid.Column="3" Content="Add" Command="{Binding AddAccountCommand}"
                                 Width="70" Height="36" Cursor="Hand" VerticalAlignment="Bottom" Foreground="White">
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button">
-                                    <Border x:Name="b" CornerRadius="8" Background="#0EA5E9">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter TargetName="b" Property="Opacity" Value="0.8"/>
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
-                    </Grid>
-                </Border>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="b" CornerRadius="8" Background="#0EA5E9">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="b" Property="Opacity" Value="0.8"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+            </Border>
 
-                <!-- Message + Action buttons -->
-                <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top" Margin="0,6,0,0" Grid.ColumnSpan="2" Grid.RowSpan="2">
-                    <TextBlock Text="{Binding Message}" FontFamily="Segoe UI" FontSize="11" VerticalAlignment="Center">
-                        <TextBlock.Style>
-                            <Style TargetType="TextBlock">
-                                <Setter Property="Foreground" Value="#F87171"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsSuccess}" Value="True">
-                                        <Setter Property="Foreground" Value="#4ADE80"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
-                    <Button Content="✅ Enable" Command="{Binding EnableCommand}"
-                            Width="80" Height="26" Margin="auto,0,6,0" Cursor="Hand" Foreground="White"
+            <!-- Message + Action buttons -->
+            <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top" Margin="0,-36,0,0" Grid.ColumnSpan="2">
+                <TextBlock Text="{Binding Message}" FontFamily="Segoe UI" FontSize="11" VerticalAlignment="Center">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Foreground" Value="#F87171"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsSuccess}" Value="True">
+                                    <Setter Property="Foreground" Value="#4ADE80"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+                <Button Content="✅ Enable" Command="{Binding EnableCommand}"
+                            Width="80" Height="26" Margin="0,0,6,0" Cursor="Hand" Foreground="White"
                             HorizontalAlignment="Right">
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Border x:Name="b" CornerRadius="6" Background="#166534">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                                <ControlTemplate.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter TargetName="b" Property="Opacity" Value="0.8"/>
-                                    </Trigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
-                    <Button Content="🚫 Disable" Command="{Binding DisableCommand}"
-                            Width="80" Height="26" Margin="0,0,0,0" Cursor="Hand" Foreground="White">
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Border x:Name="b" CornerRadius="6" Background="#7F1D1D">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                                <ControlTemplate.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter TargetName="b" Property="Opacity" Value="0.8"/>
-                                    </Trigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
-                </StackPanel>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="b" CornerRadius="6" Background="#166534">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="b" Property="Opacity" Value="0.8"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Content="🚫 Disable" Command="{Binding DisableCommand}"
+                            Width="80" Height="26" Margin="0,0,0,0" Cursor="Hand" Foreground="White" HorizontalAlignment="Center">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="b" CornerRadius="6" Background="#7F1D1D">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="b" Property="Opacity" Value="0.8"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
 
-                <!-- DataGrid -->
-                <Border Grid.Row="2" Background="#050F2D" BorderBrush="#1E5EFF"
+            <!-- DataGrid -->
+            <Border Grid.Row="2" Background="#050F2D" BorderBrush="#1E5EFF"
                         BorderThickness="1" CornerRadius="14" Grid.ColumnSpan="2">
-                    <Border.Effect>
-                        <DropShadowEffect BlurRadius="18" ShadowDepth="0" Color="#0A84FF" Opacity="0.3"/>
-                    </Border.Effect>
-                    <DataGrid ItemsSource="{Binding Accounts}"
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="18" ShadowDepth="0" Color="#0A84FF" Opacity="0.3"/>
+                </Border.Effect>
+                <DataGrid ItemsSource="{Binding Accounts}"
                               SelectedItem="{Binding SelectedAccount, Mode=TwoWay}"
                               Margin="4">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Account Number" Binding="{Binding AccountNumber}" Width="140"/>
-                            <DataGridTemplateColumn Header="Status" Width="90">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding StatusText}" FontWeight="SemiBold"
-                                                   HorizontalAlignment="Center">
-                                            <TextBlock.Style>
-                                                <Style TargetType="TextBlock">
-                                                    <Setter Property="Foreground" Value="#4ADE80"/>
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding IsActive}" Value="False">
-                                                            <Setter Property="Foreground" Value="#F87171"/>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </TextBlock.Style>
-                                        </TextBlock>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTextColumn Header="Linked Household" Binding="{Binding LinkedHousehold}" Width="130"/>
-                            <DataGridTextColumn Header="Owner"            Binding="{Binding LinkedOwner}"     Width="*"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Border>
-            </Grid>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Account Number" Binding="{Binding AccountNumber}" Width="140"/>
+                        <DataGridTemplateColumn Header="Status" Width="90">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding StatusText}"
+                       FontWeight="SemiBold"
+                       HorizontalAlignment="Left">
+
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+
+                                                <!-- Default = Active -->
+                                                <Setter Property="Foreground" Value="#4ADE80"/>
+
+                                                <Style.Triggers>
+
+                                                    <!-- Disabled -->
+                                                    <DataTrigger Binding="{Binding IsActive}" Value="False">
+                                                        <Setter Property="Foreground" Value="#F87171"/>
+                                                    </DataTrigger>
+
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+
+                                    </TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Linked Household" Binding="{Binding LinkedHousehold}" Width="130"/>
+                        <DataGridTextColumn Header="Owner"            Binding="{Binding LinkedOwner}"     Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
         </Grid>
-    </Viewbox>
+    </Grid>
 </Window>

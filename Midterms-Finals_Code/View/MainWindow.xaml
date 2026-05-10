@@ -122,9 +122,10 @@
 
             <Border.Background>
 
-                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                    <GradientStop Color="#F0020B2E" Offset="0"/>
-                    <GradientStop Color="#F0041428" Offset="1"/>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" Opacity="0.8">
+                    <GradientStop Color="#F0020B2E" Offset="0.99"/>
+                    <GradientStop Color="#F02268BF" Offset="0.707"/>
+                    <GradientStop Color="#FF020A2B" Offset="0"/>
                 </LinearGradientBrush>
             </Border.Background>
 
@@ -156,7 +157,7 @@
                            HorizontalAlignment="Center"
                            FontFamily="Segoe UI"
                            FontSize="10.5"
-                           Foreground="#607D9F"
+                           Foreground="#FFC5E0FF"
                            Margin="0,0,0,30"/>
 
                 <!-- ── Divider ── -->
@@ -175,7 +176,7 @@
                            FontFamily="Segoe UI"
                            FontSize="9.5"
                            FontWeight="SemiBold"
-                           Foreground="#4A7FA5"
+                           Foreground="#FFC5E0FF"
                            Margin="2,0,0,6"/>
 
                 <!-- ── Account number field ── -->
@@ -194,7 +195,7 @@
                                    FontSize="13"
                                    VerticalAlignment="Center"
                                    Margin="12,0,0,0"
-                                   Opacity="0.45"/>
+                                   Opacity="0.45" Foreground="#FFC5E0FF"/>
                         <TextBox x:Name="AccountNumberTextBox"
                                  Text="{Binding CurrentUser.AccountNumber, UpdateSourceTrigger=PropertyChanged}"
                                  Background="Transparent"
@@ -240,7 +241,7 @@
                            FontFamily="Segoe UI"
                            FontSize="9.5"
                            FontWeight="SemiBold"
-                           Foreground="#4A7FA5"
+                           Foreground="#FFC5E0FF"
                            Margin="2,0,0,6"/>
 
                 <!-- ── Password field ── -->
@@ -258,7 +259,7 @@
                                    FontSize="12"
                                    VerticalAlignment="Center"
                                    Margin="12,0,0,0"
-                                   Opacity="0.40"/>
+                                   Opacity="0.40" Foreground="White"/>
                         <PasswordBox x:Name="PasswordTextBox"
                                      Background="Transparent"
                                      Foreground="#E0F2FE"
@@ -309,7 +310,7 @@
                            HorizontalAlignment="Center"
                            FontFamily="Segoe UI"
                            FontSize="9.5"
-                           Foreground="#2D4A66"
+                           Foreground="#FF5E86B5"
                            TextWrapping="Wrap"
                            TextAlignment="Center"
                            Margin="0,20,0,0"/>

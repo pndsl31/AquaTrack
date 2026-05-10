@@ -6,26 +6,36 @@
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Window.Resources>
         <Style TargetType="DataGrid">
-            <Setter Property="Background" Value="Transparent"/> <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Foreground" Value="White"/>        <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="FontSize" Value="12"/>             <Setter Property="RowBackground" Value="#060F25"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="RowBackground" Value="#060F25"/>
             <Setter Property="AlternatingRowBackground" Value="#0A1628"/>
-            <Setter Property="GridLinesVisibility" Value="None"/> <Setter Property="AutoGenerateColumns" Value="False"/>
-            <Setter Property="CanUserAddRows" Value="False"/>     <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="GridLinesVisibility" Value="None"/>
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+            <Setter Property="CanUserAddRows" Value="False"/>
+            <Setter Property="IsReadOnly" Value="True"/>
             <Setter Property="ColumnHeaderStyle">
                 <Setter.Value>
                     <Style TargetType="DataGridColumnHeader">
-                        <Setter Property="Background" Value="#0D1F3C"/> <Setter Property="Foreground" Value="#7DD3FC"/>
-                        <Setter Property="FontWeight" Value="SemiBold"/> <Setter Property="Padding" Value="10,7"/>
+                        <Setter Property="Background" Value="#0D1F3C"/>
+                        <Setter Property="Foreground" Value="#7DD3FC"/>
+                        <Setter Property="FontWeight" Value="SemiBold"/>
+                        <Setter Property="Padding" Value="10,7"/>
                         <Setter Property="BorderThickness" Value="0"/>
                     </Style>
                 </Setter.Value>
             </Setter>
         </Style>
         <Style x:Key="FBtn" TargetType="Button">
-            <Setter Property="Foreground" Value="White"/>   <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="FontSize" Value="11"/>         <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Width" Value="80"/>            <Setter Property="Height" Value="28"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="Height" Value="28"/>
             <Setter Property="Margin" Value="0,0,6,0"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -33,94 +43,110 @@
                         <Border x:Name="b" CornerRadius="6" BorderBrush="#1E5EFF" BorderThickness="1" Background="#0A1628">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <ControlTemplate.Triggers><Trigger Property="IsMouseOver" Value="True"><Setter TargetName="b" Property="Background" Value="#1E3A5F"/></Trigger></ControlTemplate.Triggers>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="b" Property="Background" Value="#1E3A5F"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
     </Window.Resources>
-    <Viewbox>
-        <Grid Width="800">
-            <Grid.Background><ImageBrush ImageSource="../Images/WaterHomepageBG.png"/></Grid.Background>
-            <local:AdminNavBarControl DataContext="{Binding NavBar}"
-                                      HorizontalAlignment="Left" VerticalAlignment="Center" Margin="4,0,0,0"/>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="../Images/WaterHomepageBG.png"/>
+        </Grid.Background>
+        <local:AdminNavBarControl DataContext="{Binding NavBar}"
+                                      HorizontalAlignment="Left" VerticalAlignment="Top" Margin="4,0,0,0"/>
 
-            <Border Width="640" Height="550"
+        <Border Width="746" Height="394"
                     Background="#050F2D" BorderBrush="#1E5EFF" BorderThickness="1" CornerRadius="14"
-                    HorizontalAlignment="Left" VerticalAlignment="Center"
-                    Margin="110,0,0,0" Padding="22,18">
-                <Border.Effect><DropShadowEffect BlurRadius="18" ShadowDepth="0" Color="#0A84FF" Opacity="0.3"/></Border.Effect>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
+                    HorizontalAlignment="Left" VerticalAlignment="Top"
+                    Margin="206,50,0,0" Padding="22,18">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="18" ShadowDepth="0" Color="#0A84FF" Opacity="0.3"/>
+            </Border.Effect>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="233*"/>
+                    <ColumnDefinition Width="467*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="297"/>
+                </Grid.RowDefinitions>
 
-                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
-                        <TextBlock Text="💳 All Bills" FontFamily="Segoe UI" FontSize="16"
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10" Grid.ColumnSpan="2">
+                    <TextBlock Text="💳 All Bills" FontFamily="Segoe UI" FontSize="16"
                                    FontWeight="SemiBold" Foreground="White" VerticalAlignment="Center"/>
-                        <Button Content="✅ Mark as Paid" Command="{Binding PayBillCommand}"
+                    <Button Content="✅ Mark as Paid" Command="{Binding PayBillCommand}"
                                 Width="120" Height="30" Margin="16,0,0,0" Cursor="Hand" Foreground="White">
-                            <Button.Template><ControlTemplate TargetType="Button">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
                                 <Border x:Name="b" CornerRadius="7" Background="#166534">
                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
-                                <ControlTemplate.Triggers><Trigger Property="IsMouseOver" Value="True"><Setter TargetName="b" Property="Opacity" Value="0.8"/></Trigger></ControlTemplate.Triggers>
-                            </ControlTemplate></Button.Template>
-                        </Button>
-                        <TextBlock Text="{Binding Message}" FontFamily="Segoe UI" FontSize="11"
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="b" Property="Opacity" Value="0.8"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <TextBlock Text="{Binding Message}" FontFamily="Segoe UI" FontSize="11"
                                    VerticalAlignment="Center" Margin="12,0,0,0">
-                            <TextBlock.Style>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="Foreground" Value="#F87171"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsSuccess}" Value="True">
-                                            <Setter Property="Foreground" Value="#4ADE80"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
-                    </StackPanel>
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Foreground" Value="#F87171"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsSuccess}" Value="True">
+                                        <Setter Property="Foreground" Value="#4ADE80"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </StackPanel>
 
-                    <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10">
-                        <Button Content="All"    Style="{StaticResource FBtn}" Command="{Binding FilterAllCommand}"/>
-                        <Button Content="Unpaid" Style="{StaticResource FBtn}" Command="{Binding FilterUnpaidCommand}"/>
-                        <Button Content="Paid"   Style="{StaticResource FBtn}" Command="{Binding FilterPaidCommand}"/>
-                    </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10" Grid.ColumnSpan="2">
+                    <Button Content="All"    Style="{StaticResource FBtn}" Command="{Binding FilterAllCommand}"/>
+                    <Button Content="Unpaid" Style="{StaticResource FBtn}" Command="{Binding FilterUnpaidCommand}"/>
+                    <Button Content="Paid"   Style="{StaticResource FBtn}" Command="{Binding FilterPaidCommand}"/>
+                </StackPanel>
 
-                    <DataGrid Grid.Row="2" ItemsSource="{Binding FilteredBills}"
-                              SelectedItem="{Binding SelectedBill, Mode=TwoWay}">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Bill ID"     Binding="{Binding BillID}"      Width="75"/>
-                            <DataGridTextColumn Header="Household"   Binding="{Binding OwnerName}"   Width="120"/>
-                            <DataGridTextColumn Header="Read Date"   Binding="{Binding ReadDate}"    Width="100"/>
-                            <DataGridTextColumn Header="m³"          Binding="{Binding Consumption}" Width="55"/>
-                            <DataGridTextColumn Header="PHP"         Binding="{Binding AmountDue}"   Width="80"/>
-                            <DataGridTextColumn Header="Due Date"    Binding="{Binding DueDate}"     Width="100"/>
-                            <DataGridTemplateColumn Header="Status"  Width="*">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Status}" FontWeight="SemiBold" HorizontalAlignment="Center">
-                                            <TextBlock.Style>
-                                                <Style TargetType="TextBlock">
-                                                    <Setter Property="Foreground" Value="#4ADE80"/>
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Status}" Value="Unpaid">
-                                                            <Setter Property="Foreground" Value="#FB923C"/>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </TextBlock.Style>
-                                        </TextBlock>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Grid>
-            </Border>
-        </Grid>
-    </Viewbox>
+                <DataGrid Grid.Row="2" ItemsSource="{Binding FilteredBills}"
+                              SelectedItem="{Binding SelectedBill, Mode=TwoWay}" Grid.ColumnSpan="2" Margin="0,0,0,10">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Bill ID"     Binding="{Binding BillID}"      Width="75"/>
+                        <DataGridTextColumn Header="Household"   Binding="{Binding OwnerName}"   Width="120"/>
+                        <DataGridTextColumn Header="Read Date"   Binding="{Binding ReadDate}"    Width="100"/>
+                        <DataGridTextColumn Header="m³"          Binding="{Binding Consumption}" Width="55"/>
+                        <DataGridTextColumn Header="PHP"         Binding="{Binding AmountDue}"   Width="80"/>
+                        <DataGridTextColumn Header="Due Date"    Binding="{Binding DueDate}"     Width="100"/>
+                        <DataGridTemplateColumn Header="Status"  Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Status}" FontWeight="SemiBold" HorizontalAlignment="Center">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Foreground" Value="#4ADE80"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Status}" Value="Unpaid">
+                                                        <Setter Property="Foreground" Value="#FB923C"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Border>
+    </Grid>
 </Window>

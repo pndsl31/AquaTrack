@@ -234,9 +234,8 @@
             <TextBlock Text="⏲" FontSize="30" Margin="479,95,280,294" Foreground="White"/>
             <TextBlock Text="Meter Number" FontSize="15" Margin="533,98,151,314" Foreground="White" FontFamily="Segoe UI"/>
             <TextBlock Text="{Binding Meter.MeterNumber}" FontSize="12" Margin="536,120,165,292" Foreground="White" FontFamily="Segoe UI"/>
-            
-            <Expander HorizontalAlignment="Left" Height="426" Header="☰  AquaTrack" IsExpanded="False" 
-  Margin="4,0,0,0" VerticalAlignment="Center" Width="200" 
+
+            <Expander HorizontalAlignment="Left" Height="426" Header="☰  AquaTrack" IsExpanded="False" VerticalAlignment="Top" Width="200" 
   Foreground="White">
                 <Expander.Style>
                     <Style TargetType="Expander">

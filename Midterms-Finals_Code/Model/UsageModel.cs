@@ -11,7 +11,7 @@ namespace AquaTrack.Model
     {
         public string _usageID = String.Empty;
         public string _readDate = String.Empty;
-        public string _consumption = String.Empty;
+        public decimal _consumption = 0;
         public string _usageStatus = String.Empty;
         public string _meterID = String.Empty;
 
@@ -27,7 +27,7 @@ namespace AquaTrack.Model
             set { _readDate = value; OnPropertyChanged(); }
         }
 
-        public string Consumption
+        public decimal Consumption
         {
             get => _consumption;
             set { _consumption = value; OnPropertyChanged(); }

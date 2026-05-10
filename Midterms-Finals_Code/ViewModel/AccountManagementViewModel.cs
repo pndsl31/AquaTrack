@@ -11,7 +11,7 @@ namespace AquaTrack.ViewModel
     public class AccountManagementViewModel : ObservableObject
     {
         private const string ConnStr =
-            @"Server=DESKTOP-6085EPQ;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
+            @"Server=DESKTOP-2SQJPO3\SQLEXPRESS;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
 
         public Account CurrentUser { get; }
         public AdminNavBarViewModel NavBar { get; }
@@ -71,9 +71,9 @@ namespace AquaTrack.ViewModel
                     Accounts.Add(new Account
                     {
                         AccountNumber = r["Account_Number"].ToString()!,
-                        IsActive = (bool)r["IsActive"],
-                        LinkedHousehold = r["LinkedHousehold"].ToString()!,
-                        LinkedOwner = r["LinkedOwner"].ToString()!
+                        IsActive = bool.Parse(r["IsActive"].ToString()!),
+                        LinkedHousehold = r["linkedhousehold"].ToString()!,
+                        LinkedOwner = r["linkedowner"].ToString()!
                     });
             }
             catch (Exception ex) { MessageBox.Show("Load error: " + ex.Message); }
@@ -94,7 +94,7 @@ namespace AquaTrack.ViewModel
                 using var cmd = new SqlCommand("sp_AddAccount", conn)
                 { CommandType = System.Data.CommandType.StoredProcedure };
                 cmd.Parameters.AddWithValue("@Account_Number", NewAccountNumber.Trim());
-                cmd.Parameters.AddWithValue("@HashedPassword", PasswordHelper.Hash(NewPassword));
+                cmd.Parameters.AddWithValue("@HashedPassword", NewPassword);
                 await cmd.ExecuteNonQueryAsync();
                 IsSuccess = true; Message = $"✔ Account {NewAccountNumber} created.";
                 NewAccountNumber = NewPassword = NewConfirm = "";
@@ -121,5 +121,6 @@ namespace AquaTrack.ViewModel
             }
             catch (Exception ex) { IsSuccess = false; Message = "⚠ " + ex.Message; }
         }
+
     }
 }

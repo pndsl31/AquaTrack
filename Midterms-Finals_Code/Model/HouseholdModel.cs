@@ -16,6 +16,7 @@ namespace AquaTrack.Model
         private string _Email = "";
         private string _Address = "";
         private string _RegistrationDate = "";
+        private bool _isActive = true;
 
         public string HouseholdID
         {
@@ -51,6 +52,19 @@ namespace AquaTrack.Model
         {
             get => _RegistrationDate;
             set { _RegistrationDate = value; OnPropertyChanged(); }
+        }
+        public bool IsActive
+        {
+            get => _isActive;
+            set { _isActive = value; OnPropertyChanged(); }
+        }
+
+        public string StatusText
+        {
+            get
+            {
+                return IsActive ? "Active" : "Disabled";
+            }
         }
     }
 }
