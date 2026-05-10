@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AquaTrack.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,10 @@ namespace AquaTrack.View
     /// </summary>
     public partial class Billing : Window
     {
-        public Billing()
+        public Billing(Account currentUser, HouseholdModel household, MeterModel meter)
         {
             InitializeComponent();
+            DataContext = new ViewModel.BillingViewModel(currentUser, household, meter, this);
         }
     }
 }

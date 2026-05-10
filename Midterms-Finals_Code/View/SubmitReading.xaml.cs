@@ -22,13 +22,10 @@ namespace AquaTrack.View
 
     public partial class SubmitReading : Window
     {
-        public Account CurrentUser { get; set; }
-        public HouseholdModel HouseHold { get; set; }
-        public SubmitReading(Account currentUser, HouseholdModel household)
+        public SubmitReading(Account currentUser, HouseholdModel household, MeterModel meter)
         {
-            CurrentUser = currentUser;
-            HouseHold = household;
             InitializeComponent();
+            DataContext = new ViewModel.SubmitReadingViewModel(currentUser, household, meter, this);
         }
     }
 }

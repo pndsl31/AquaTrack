@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AquaTrack.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,10 @@ namespace AquaTrack.View
     /// </summary>
     public partial class Alerts : Window
     {
-        public Alerts()
+        public Alerts(Account currentUser, HouseholdModel household, MeterModel meter)
         {
             InitializeComponent();
+            DataContext = new ViewModel.AlertsViewModel(currentUser, household, meter, this);
         }
     }
 }

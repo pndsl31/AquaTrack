@@ -18,6 +18,7 @@ namespace AquaTrack.View
         public Account CurrentUser { get; set; }
         public HouseholdModel HouseHold { get; set; }
         public MeterModel Meter { get; set; }
+
         public DashboardWindow(Account currentUser, HouseholdModel household, MeterModel meter)
         {
             CurrentUser = currentUser;
