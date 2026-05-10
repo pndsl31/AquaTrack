@@ -42,7 +42,9 @@
         <Grid.Background>
             <ImageBrush ImageSource="../Images/WaterHomepageBG.png"/>
         </Grid.Background>
-        <local:AdminNavBarControl DataContext="{Binding NavBar}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <local:AdminNavBarControl DataContext="{Binding NavBar}"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Top"/>
 
         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="254,23,0,0" Width="640">
             <Grid.RowDefinitions>
@@ -151,7 +153,7 @@
                         </Grid>
                         <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="8,0,0,0">
                             <Button Content="Register" Command="{Binding RegisterCommand}"
-                                        Width="90" Height="34" Cursor="Hand" Foreground="White" Margin="0,0,6,0">
+                                        Width="90" Height="34" Cursor="Hand" Foreground="White" Margin="0,0,0,0">
                                 <Button.Template>
                                     <ControlTemplate TargetType="Button">
                                         <Border x:Name="b" CornerRadius="8" Background="#0EA5E9">
@@ -166,10 +168,25 @@
                                 </Button.Template>
                             </Button>
                             <Button Content="🚫 Disable" Command="{Binding DisableCommand}"
-                                        Width="90" Height="34" Cursor="Hand" Foreground="White">
+                                        Width="89" Height="34" Cursor="Hand" Foreground="White">
                                 <Button.Template>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border x:Name="b" CornerRadius="8" Background="#7F1D1D">
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border x:Name="b" CornerRadius="8" Background="#7F1D1D" Margin="6,0,0,0">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="b" Property="Opacity" Value="0.8"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                            <Button Content="✅ Enable" Command="{Binding EnableCommand}"
+            Width="90" Height="34" Cursor="Hand" Foreground="White">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border x:Name="b" CornerRadius="8" Background="#166534" Margin="6,0,0,0">
                                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                         </Border>
                                         <ControlTemplate.Triggers>

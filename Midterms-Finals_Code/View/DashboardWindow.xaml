@@ -31,7 +31,14 @@
                         </Style.Triggers>
                     </Style>
                 </Expander.Style>
-                <Grid Background="#0A1628" Margin="0,4,0,0">
+                <Grid Margin="0,4,0,0">
+                    <Grid.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" Opacity="0.89">
+                            <GradientStop Color="#F0020B2E" Offset="0.99"/>
+                            <GradientStop Color="#F02268BF" Offset="0.707"/>
+                            <GradientStop Color="#FF020A2B" Offset="0"/>
+                        </LinearGradientBrush>
+                    </Grid.Background>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="180"/>
                         <RowDefinition Height="40*"/>

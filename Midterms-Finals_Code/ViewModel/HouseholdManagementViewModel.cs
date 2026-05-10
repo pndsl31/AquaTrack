@@ -38,6 +38,7 @@ namespace AquaTrack.ViewModel
 
         public ICommand RegisterCommand { get; }
         public ICommand DisableCommand { get; }
+        public ICommand EnableCommand { get; }
 
         public HouseholdManagementViewModel(Account user, Window win)
         {
@@ -45,6 +46,7 @@ namespace AquaTrack.ViewModel
             NavBar = new AdminNavBarViewModel(user, win);
             RegisterCommand = new RelayCommand(async _ => await RegisterAsync());
             DisableCommand = new RelayCommand(async _ => await DisableAsync());
+            EnableCommand = new RelayCommand(async _ => await EnableAsync());
             _ = LoadAllAsync();
         }
 
@@ -91,6 +93,40 @@ namespace AquaTrack.ViewModel
             catch (Exception ex) { MessageBox.Show("Load error: " + ex.Message); }
         }
 
+        private async Task<bool> CanAssignHouseholdAsync(string householdId)
+        {
+            using var conn = new SqlConnection(ConnStr);
+            await conn.OpenAsync();
+
+            const string sql = @"
+            SELECT Owner_Name
+            FROM HouseHold
+            WHERE Household_ID = @HouseholdID";
+
+            using var cmd = new SqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@HouseholdID", householdId);
+
+            var result = await cmd.ExecuteScalarAsync();
+
+            if (result == null || result == DBNull.Value)
+            {
+                return true;
+            }
+
+            string owner = result.ToString()!;
+
+            // ❌ Household exists but already has an owner
+            if (!string.IsNullOrWhiteSpace(owner))
+            {
+                IsSuccess = false;
+                Message = "⚠ This household already has an owner assigned.";
+                return false;
+            }
+
+            // ✅ Household exists and is unassigned
+            return true;
+        }
+
         private async Task RegisterAsync()
         {
             Message = "";
@@ -101,6 +137,8 @@ namespace AquaTrack.ViewModel
 
             try
             {
+                if (!await CanAssignHouseholdAsync(HouseholdID))
+                    return;
                 using var conn = new SqlConnection(ConnStr);
                 await conn.OpenAsync();
                 using var cmd = new SqlCommand("sp_AddHousehold", conn)
@@ -131,6 +169,22 @@ namespace AquaTrack.ViewModel
                 cmd.Parameters.AddWithValue("@Account_Number", SelectedHousehold.AccountNumber);
                 await cmd.ExecuteNonQueryAsync();
                 IsSuccess = true; Message = $"✔ Household {SelectedHousehold.HouseholdID} disabled.";
+                await LoadAllAsync();
+            }
+            catch (Exception ex) { IsSuccess = false; Message = "⚠ " + ex.Message; }
+        }
+        private async Task EnableAsync()
+        {
+            if (SelectedHousehold == null) { Message = "⚠ Select a household first."; IsSuccess = false; return; }
+            try
+            {
+                using var conn = new SqlConnection(ConnStr);
+                await conn.OpenAsync();
+                using var cmd = new SqlCommand("sp_EnableAccount", conn)
+                { CommandType = System.Data.CommandType.StoredProcedure };
+                cmd.Parameters.AddWithValue("@Account_Number", SelectedHousehold.AccountNumber);
+                await cmd.ExecuteNonQueryAsync();
+                IsSuccess = true; Message = $"✔ Household {SelectedHousehold.HouseholdID} enabled.";
                 await LoadAllAsync();
             }
             catch (Exception ex) { IsSuccess = false; Message = "⚠ " + ex.Message; }

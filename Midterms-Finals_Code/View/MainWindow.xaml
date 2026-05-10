@@ -290,14 +290,6 @@
                 </Border>
 
                 <!-- ── Forgot password link ── -->
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Right"
-                            Margin="0,0,2,26">
-                    <Button Content="Forgot password?"
-                            Style="{StaticResource LinkButton}"/>
-                </StackPanel>
-
-                <!-- ── Login button ── -->
                 <Button Content="SIGN IN TO AQUATRACK"
                         Command="{Binding LoginCommand}"
                         CommandParameter="{Binding ElementName=PasswordTextBox}"
@@ -305,6 +297,8 @@
                         Height="46"
                         FontSize="13"
                         Padding="0"/>
+
+                <!-- ── Login button ── -->
 
                 <TextBlock Text="For account issues, contact your local water district."
                            HorizontalAlignment="Center"
