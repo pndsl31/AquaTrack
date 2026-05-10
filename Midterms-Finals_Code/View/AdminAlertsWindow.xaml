@@ -133,7 +133,7 @@
                               SelectedItem="{Binding SelectedAlert, Mode=TwoWay}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Alert ID"   Binding="{Binding AlrtID}"    Width="75"/>
-                        <DataGridTextColumn Header="Household"  Binding="{Binding OwnerName}" Width="110"/>
+                        <DataGridTextColumn Header="Household"  Binding="{Binding HouseholdID}" Width="110"/>
                         <DataGridTextColumn Header="Type"       Binding="{Binding AlertType}" Width="120"/>
                         <DataGridTextColumn Header="Date"       Binding="{Binding AlertDate}" Width="100"/>
                         <DataGridTextColumn Header="Message"    Binding="{Binding Message}"   Width="160"/>

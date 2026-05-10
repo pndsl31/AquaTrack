@@ -59,7 +59,7 @@
                         <ColumnDefinition Width="220"/>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="90"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0" Margin="0,0,16,0">
                         <TextBlock Text="SELECT HOUSEHOLD" FontSize="9" Foreground="#4A7FA5"

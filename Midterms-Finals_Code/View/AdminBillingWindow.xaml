@@ -121,8 +121,8 @@
                               SelectedItem="{Binding SelectedBill, Mode=TwoWay}" Grid.ColumnSpan="2" Margin="0,0,0,10">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Bill ID"     Binding="{Binding BillID}"      Width="75"/>
-                        <DataGridTextColumn Header="Household"   Binding="{Binding OwnerName}"   Width="120"/>
-                        <DataGridTextColumn Header="Read Date"   Binding="{Binding ReadDate}"    Width="100"/>
+                        <DataGridTextColumn Header="Household"   Binding="{Binding HouseholdID}"   Width="120"/>
+                        <DataGridTextColumn Header="Due Date"   Binding="{Binding DueDate}"    Width="100"/>
                         <DataGridTextColumn Header="m³"          Binding="{Binding Consumption}" Width="55"/>
                         <DataGridTextColumn Header="PHP"         Binding="{Binding AmountDue}"   Width="80"/>
                         <DataGridTextColumn Header="Due Date"    Binding="{Binding DueDate}"     Width="100"/>

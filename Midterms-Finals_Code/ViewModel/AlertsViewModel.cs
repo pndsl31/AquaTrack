@@ -11,7 +11,7 @@ namespace AquaTrack.ViewModel
     public class AlertsViewModel : ObservableObject
     {
         private const string ConnStr =
-            @"Server=DESKTOP-2SQJPO3\SQLEXPRESS;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
+            @"Server=DESKTOP-6085EPQ;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
 
         public Account CurrentUser { get; }
         public HouseholdModel HouseHold { get; }

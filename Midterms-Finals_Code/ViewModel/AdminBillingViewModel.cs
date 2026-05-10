@@ -12,7 +12,7 @@ namespace AquaTrack.ViewModel
     public class AdminBillingViewModel : ObservableObject
     {
         private const string ConnStr =
-            @"Server=DESKTOP-2SQJPO3\SQLEXPRESS;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
+            @"Server=DESKTOP-6085EPQ;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
 
         public Account CurrentUser { get; }
         public AdminNavBarViewModel NavBar { get; }
@@ -59,7 +59,7 @@ namespace AquaTrack.ViewModel
                            u.Read_Date, u.Consumption
                     FROM Bill b
                     INNER JOIN HouseHold h ON b.Household_ID = h.Household_ID
-                    INNER JOIN Usage     u ON b.Usage_ID     = u.Usage_ID
+                    INNER JOIN Usage u ON b.Usage_ID = u.Usage_ID
                     ORDER BY b.Due_Date DESC";
                 using var cmd = new SqlCommand(q, conn);
                 using var r = await cmd.ExecuteReaderAsync();
@@ -72,7 +72,8 @@ namespace AquaTrack.ViewModel
                         AmountDue = Convert.ToDecimal(r["Amount_Due"]),
                         Status = r["Status"].ToString()!,
                         UsageID = r["Usage_ID"].ToString()!,
-                        HouseholdID = r["Household_ID"].ToString()!
+                        HouseholdID = r["Household_ID"].ToString()!,
+                        Consumption = Convert.ToDecimal(r["Consumption"])
                     });
                 ApplyFilter();
             }

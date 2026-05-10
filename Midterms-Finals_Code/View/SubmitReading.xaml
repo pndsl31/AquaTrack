@@ -7,15 +7,15 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
     <Viewbox>
-        <Grid Width="960">
+        <Grid Width="964">
             <Grid.Background>
                 <ImageBrush ImageSource="../Images/WaterHomepageBG.png"/>
             </Grid.Background>
 
             <!-- ===== NAV BAR ===== -->
-            <Expander HorizontalAlignment="Left" Height="538" Header="☰  AquaTrack"
-                      IsExpanded="False" VerticalAlignment="Center"
-                      Foreground="White" Panel.ZIndex="10">
+            <Expander HorizontalAlignment="Left" Height="528" Header="☰  AquaTrack"
+          IsExpanded="False" VerticalAlignment="Top"
+          Foreground="White" Panel.ZIndex="10" Width="201">
                 <Expander.Style>
                     <Style TargetType="Expander">
                         <Setter Property="BorderThickness" Value="1"/>
@@ -48,8 +48,8 @@
                         <RowDefinition Height="40*"/>
                     </Grid.RowDefinitions>
                     <Image Grid.Row="0" Source="/Images/LogoOnly.png"/>
-                    <Button Grid.Row="1" Content="🏠  Dashboard"           Command="{Binding NavBar.GoToMainDashboardCommand}" Style="{StaticResource NavButton}"/>
-                    <Button Grid.Row="2" Content="📟  Submit Meter Reading" Command="{Binding NavBar.GoToSubmitMeterCommand}" Tag="Active" Style="{StaticResource NavButton}"/>
+                    <Button Grid.Row="1" Content="🏠  Dashboard"           Command="{Binding NavBar.GoToMainDashboardCommand}" Tag="Active" Style="{StaticResource NavButton}"/>
+                    <Button Grid.Row="2" Content="📟  Submit Meter Reading" Command="{Binding NavBar.GoToSubmitMeterCommand}"   Style="{StaticResource NavButton}"/>
                     <Button Grid.Row="3" Content="💳  Billing"              Command="{Binding NavBar.GoToBillingCommand}"       Style="{StaticResource NavButton}"/>
                     <Button Grid.Row="4" Content="🔔  Alerts"               Command="{Binding NavBar.GoToAlertsCommand}"        Style="{StaticResource NavButton}"/>
                     <Button Grid.Row="5" Content="🚪  Log Out"              Command="{Binding NavBar.LogoutCommand}"            Style="{StaticResource NavButtonDanger}"/>

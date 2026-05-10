@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="AquaTrack — Billing"
         Background="#020B2E"
-        Height="620" Width="1080"
+        Height="620" Width="1086"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
     <Viewbox>
@@ -13,9 +13,9 @@
             </Grid.Background>
 
             <!-- ===== NAV BAR ===== -->
-            <Expander HorizontalAlignment="Left" Height="489" Header="☰  AquaTrack"
-                      IsExpanded="False" VerticalAlignment="Top"
-                      Foreground="White" Panel.ZIndex="10">
+            <Expander HorizontalAlignment="Left" Height="499" Header="☰  AquaTrack"
+          IsExpanded="False" VerticalAlignment="Center"
+          Foreground="White" Panel.ZIndex="10" Width="201">
                 <Expander.Style>
                     <Style TargetType="Expander">
                         <Setter Property="BorderThickness" Value="1"/>
@@ -33,11 +33,11 @@
                 </Expander.Style>
                 <Grid Margin="0,4,0,0">
                     <Grid.Background>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" Opacity="0.89">
-                        <GradientStop Color="#F0020B2E" Offset="0.99"/>
-                        <GradientStop Color="#F02268BF" Offset="0.707"/>
-                        <GradientStop Color="#FF020A2B" Offset="0"/>
-                    </LinearGradientBrush>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" Opacity="0.89">
+                            <GradientStop Color="#F0020B2E" Offset="0.99"/>
+                            <GradientStop Color="#F02268BF" Offset="0.707"/>
+                            <GradientStop Color="#FF020A2B" Offset="0"/>
+                        </LinearGradientBrush>
                     </Grid.Background>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="180"/>
@@ -48,9 +48,9 @@
                         <RowDefinition Height="40*"/>
                     </Grid.RowDefinitions>
                     <Image Grid.Row="0" Source="/Images/LogoOnly.png"/>
-                    <Button Grid.Row="1" Content="🏠  Dashboard"           Command="{Binding NavBar.GoToMainDashboardCommand}" Style="{StaticResource NavButton}"/>
+                    <Button Grid.Row="1" Content="🏠  Dashboard"           Command="{Binding NavBar.GoToMainDashboardCommand}" Tag="Active" Style="{StaticResource NavButton}"/>
                     <Button Grid.Row="2" Content="📟  Submit Meter Reading" Command="{Binding NavBar.GoToSubmitMeterCommand}"   Style="{StaticResource NavButton}"/>
-                    <Button Grid.Row="3" Content="💳  Billing"              Command="{Binding NavBar.GoToBillingCommand}" Tag="Active" Style="{StaticResource NavButton}"/>
+                    <Button Grid.Row="3" Content="💳  Billing"              Command="{Binding NavBar.GoToBillingCommand}"       Style="{StaticResource NavButton}"/>
                     <Button Grid.Row="4" Content="🔔  Alerts"               Command="{Binding NavBar.GoToAlertsCommand}"        Style="{StaticResource NavButton}"/>
                     <Button Grid.Row="5" Content="🚪  Log Out"              Command="{Binding NavBar.LogoutCommand}"            Style="{StaticResource NavButtonDanger}"/>
                 </Grid>
@@ -102,7 +102,7 @@
                     </UniformGrid>
 
                     <!-- Filter buttons -->
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10" HorizontalAlignment="Right">
                         <Button Content="All" Command="{Binding FilterAllCommand}"
                                 Padding="14,5" Margin="0,0,6,0" FontFamily="Segoe UI" FontSize="11"
                                 Foreground="White" Background="#1A3A6B" BorderBrush="#1E5EFF"

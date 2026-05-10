@@ -11,7 +11,7 @@ namespace AquaTrack.ViewModel
     public class AdminReportsViewModel : ObservableObject
     {
         private const string ConnStr =
-            @"Server=DESKTOP-2SQJPO3\SQLEXPRESS;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
+            @"Server=DESKTOP-6085EPQ;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
 
         public Account CurrentUser { get; }
         public AdminNavBarViewModel NavBar { get; }
@@ -80,11 +80,10 @@ namespace AquaTrack.ViewModel
                     totalConsumption += c;
                     UsageHistory.Add(new UsageModel
                     {
-                        UsageID = r["Usage_ID"].ToString()!,
+                        UsageID = r["Usage_ID"].ToString()!,    
                         ReadDate = Convert.ToDateTime(r["Read_Date"]).ToString("MMM dd, yyyy"),
                         Consumption = c,
                         UsageStatus = r["Usage_Status"].ToString()!,
-                        MeterID = r["Meter_ID"].ToString()!
                     });
                 }
 				TotalConsumption = $"{totalConsumption} m³";

@@ -15,6 +15,7 @@ namespace AquaTrack.Model
         public string _status = string.Empty;
         public string _houseHoldID = string.Empty;
         public string _usageID = string.Empty;
+        private decimal _consumption = 0;
 
         public string BillID
         {
@@ -45,6 +46,11 @@ namespace AquaTrack.Model
         {
             get => _houseHoldID;
             set { _houseHoldID = value; OnPropertyChanged(); }
+        }
+        public decimal Consumption
+        {
+            get => _consumption;
+            set { _consumption = value; OnPropertyChanged(); }
         }
     }
 }

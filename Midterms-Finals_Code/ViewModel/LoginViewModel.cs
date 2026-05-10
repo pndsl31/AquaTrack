@@ -53,7 +53,7 @@ namespace AquaTrack.ViewModel
                 return;
             }
 
-            string connectionString = @"Server=DESKTOP-2SQJPO3\SQLEXPRESS;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
+            string connectionString = @"Server=DESKTOP-6085EPQ;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
 
             try
             {
