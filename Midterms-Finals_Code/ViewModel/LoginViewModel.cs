@@ -53,7 +53,7 @@ namespace AquaTrack.ViewModel
                 return;
             }
 
-            string connectionString = @"Server=DESKTOP-6085EPQ;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
+            string connectionString = @"Server=Amenoai;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
 
             try
             {
@@ -83,8 +83,23 @@ namespace AquaTrack.ViewModel
                                         
                                         logged = true;
                                         var adminDashboard = new AdminDashboardWindow(CurrentUser);
+
+                                        // Set as main window
+                                        Application.Current.MainWindow = adminDashboard;
+
+                                        // Show dashboard
                                         adminDashboard.Show();
-                                        Application.Current.MainWindow.Close();
+
+                                        // Close login window
+                                        foreach (Window window in Application.Current.Windows)
+                                        {
+                                            if (window is MainWindow)
+                                            {
+                                                window.Close();
+                                                break;
+                                            }
+                                        }
+                                        
                                     }
                                     else
                                     {
@@ -144,8 +159,22 @@ namespace AquaTrack.ViewModel
                                         MessageBoxButton.OK, MessageBoxImage.Information);
 
                                         var dashboard = new DashboardWindow(CurrentUser, HouseHold, Meter);
+
+                                        // Set dashboard as the new main window
+                                        Application.Current.MainWindow = dashboard;
+
+                                        // Show dashboard
                                         dashboard.Show();
-                                        Application.Current.MainWindow.Close();
+
+                                        // Close current login window safely
+                                        foreach (Window window in Application.Current.Windows)
+                                        {
+                                            if (window is MainWindow)
+                                            {
+                                                window.Close();
+                                                break;
+                                            }
+                                        }
                                     }
                                     else
                                     {

@@ -7,7 +7,7 @@ namespace AquaTrack.ViewModel
     internal class DashboardViewModel : ObservableObject
     {
         private const string ConnStr =
-            @"Server=DESKTOP-6085EPQ;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
+            @"Server=Amenoai;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
 
         public Account CurrentUser { get; set; }
         public HouseholdModel HouseHold { get; set; }
@@ -59,7 +59,7 @@ namespace AquaTrack.ViewModel
             HouseHold = household;
             Meter = meter;
             NavBar = new NavBarViewModel(currentUser, household, currentWindow, meter);
-            LoadSummaryAsync();
+            _ = LoadSummaryAsync();
         }
 
         private async Task LoadSummaryAsync()

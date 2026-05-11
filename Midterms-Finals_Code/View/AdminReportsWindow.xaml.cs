@@ -23,5 +23,6 @@ namespace AquaTrack.View
             InitializeComponent();
             DataContext = new AdminReportsViewModel(user, this);
         }
+
     }
 }

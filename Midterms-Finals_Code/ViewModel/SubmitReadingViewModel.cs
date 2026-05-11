@@ -10,7 +10,7 @@ namespace AquaTrack.ViewModel
     public class SubmitReadingViewModel : ObservableObject
     {
         private const string ConnStr =
-            @"Server=DESKTOP-6085EPQ;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
+            @"Server=Amenoai;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
 
         public Account CurrentUser { get; }
         public HouseholdModel HouseHold { get; }
@@ -96,7 +96,7 @@ namespace AquaTrack.ViewModel
                 cmd.Parameters.AddWithValue("@Consumption", c);
                 await cmd.ExecuteNonQueryAsync();
 
-                decimal amt = c * 23.00m;
+                decimal amt = c * 51m;
                 bool excessive = c > 30;
 
                 IsSuccess = true;

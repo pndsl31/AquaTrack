@@ -57,10 +57,10 @@
             </Expander>
 
             <!-- ===== MAIN PANEL ===== -->
-            <Border Width="615" CornerRadius="18" Background="#050F2D"
+            <Border Width="616" CornerRadius="18" Background="#050F2D"
                     BorderBrush="#1E5EFF" BorderThickness="1"
-                    HorizontalAlignment="Left" VerticalAlignment="Top"
-                    Margin="102,30,0,0" Padding="20,18,20,18">
+                    HorizontalAlignment="Center" VerticalAlignment="Top"
+                    Margin="0,30,0,0" Padding="20,18,20,18">
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="25" ShadowDepth="0" Color="#0A84FF" Opacity="0.35"/>
                 </Border.Effect>
@@ -93,7 +93,7 @@
 
                         <!-- Consumption -->
                         <StackPanel Grid.Column="0">
-                            <TextBlock Text="Consumption (m³)" FontSize="11" Foreground="#7BA4D4"
+                            <TextBlock Text="Consumption (m³)  |  Current Rate = PHP 51.00 per m³" FontSize="11" Foreground="#7BA4D4"
                                        FontFamily="Segoe UI" Margin="0,0,0,6"/>
                             <Border CornerRadius="8" BorderBrush="#1E5EFF" BorderThickness="1" Background="#0A1A40">
                                 <TextBox Text="{Binding Consumption, UpdateSourceTrigger=PropertyChanged}"

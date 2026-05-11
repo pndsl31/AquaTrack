@@ -11,7 +11,7 @@ namespace AquaTrack.ViewModel
     public class UsageRecordingViewModel : ObservableObject
     {
         private const string ConnStr =
-            @"Server=DESKTOP-6085EPQ;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
+            @"Server=Amenoai;Database=AquaTrack;Trusted_Connection=True;TrustServerCertificate=True;";
 
         public Account CurrentUser { get; }
         public AdminNavBarViewModel NavBar { get; }
@@ -112,7 +112,7 @@ namespace AquaTrack.ViewModel
                 cmd.Parameters.AddWithValue("@Consumption", c);
                 await cmd.ExecuteNonQueryAsync();
 
-                decimal amt = c * 23.00m;
+                decimal amt = c * 51.00m;
                 bool excessive = c > 30;
                 IsSuccess = true;
                 Message = $"✔ Recorded! Bill: PHP {amt:F2}. Due: {rd.AddDays(30):MMM dd, yyyy}.";
